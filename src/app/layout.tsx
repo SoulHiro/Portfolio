@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Geist } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -34,8 +35,16 @@ export default function RootLayout({
         "font-sans",
         geist.variable,
       )}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <body className="min-h-full flex flex-col">{children}</body>
+      </ThemeProvider>
     </html>
   );
 }
