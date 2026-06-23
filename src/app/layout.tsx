@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const dmSanss = DM_Sans({
   variable: "--font-dm-sans",
@@ -8,8 +11,12 @@ const dmSanss = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: {template: "%s | Victor M. Santos Portfolio", default: "Victor M. Santos Portfolio"},
-  description: "Morning! My name is Victor, and I am a software engineer. Check out my portfolio!",
+  title: {
+    template: "%s | Victor M. Santos Portfolio",
+    default: "Victor M. Santos Portfolio",
+  },
+  description:
+    "Morning! My name is Victor, and I am a software engineer. Check out my portfolio!",
 };
 
 export default function RootLayout({
@@ -20,7 +27,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSanss.variable} h-full antialiased`}
+      className={cn(
+        "h-full",
+        "antialiased",
+        dmSanss.variable,
+        "font-sans",
+        geist.variable,
+      )}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
