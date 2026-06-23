@@ -1,0 +1,66 @@
+{
+  "Metadata": {
+    "title": "Victor M. Santos — Software Developer & Product Designer",
+    "description": "Software developer and product designer crafting digital experiences with purpose."
+  },
+  "Nav": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Hero": {
+    "description": "Building digital products with systemic vision — from business problem to interface, through architecture and experience.",
+    "cta": "Get in touch"
+  },
+  "About": {
+    "label": "WHO I AM",
+    "alt": "Victor M. Santos — Software Engineer & Product Designer",
+    "subtitle": "Software Engineer & Product Designer",
+    "bio1": "My first contact with code was at age 7, setting up Minecraft servers with a friend. Then came Lua for Roblox servers, Python for Discord bots, and what started as a kid's curiosity became something I simply couldn't let go of.",
+    "bio2": "Today I spend most of my time studying, building and breaking things until I understand how they work from the inside out. I like sharing what I learn, I believe teaching is the best way to truly understand something. My goal is to go as far as possible in software engineering and, along the way, build things that make a real difference in people's lives."
+  },
+  "Works": {
+    "title": "Selected",
+    "titleHighlight": "works",
+    "projects": "projects"
+  },
+  "WorksPage": {
+    "label": "WORKS",
+    "title": "Works",
+    "description": "Projects I've built and things I've written. From SaaS products to thoughts on craft.",
+    "projectsLabel": "PROJECTS",
+    "projectsTitle": "Selected projects",
+    "noProjects": "No projects found.",
+    "writingLabel": "WRITING",
+    "writingTitle": "From the blog",
+    "noPosts": "No posts yet.",
+    "readMin": "min read"
+  },
+  "Footer": {
+    "copyright": "© {year} Victor M. Santos. All rights reserved.",
+    "whatsappMessage": "Hey Victor! I came across your portfolio and would love to chat.",
+    "whatsappLabel": "Chat on WhatsApp"
+  },
+  "TechStack": {
+    "label": "STACK",
+    "title": "What I",
+    "titleHighlight": "build with",
+    "description": "The tools I reach for when crafting digital products: from interface to infrastructure.",
+    "frontend": "Frontend",
+    "frontendDesc": "Building interfaces from design system to rendered screen. React, Next.js, and TypeScript are my daily tools, with a focus on performance and accessibility.",
+    "backend": "Backend",
+    "backendDesc": "Designing APIs and data layers that hold up under real load. Node.js, Go, and PostgreSQL. I care about correctness over cleverness.",
+    "tools": "Tools & Infra",
+    "toolsDesc": "The infrastructure layer: from content modeling in Sanity to container orchestration and CI/CD. What ships is what matters."
+  },
+  "Contact": {
+    "title1": "Let's build",
+    "titleHighlight": "something",
+    "title2": "together.",
+    "description": "Have a project in mind? Reach out via WhatsApp or connect on social media. I'm always open to new challenges.",
+    "whatsappCta": "Chat on WhatsApp",
+    "whatsappMessage": "Hey Victor! I came across your portfolio and would love to chat."
+  }
+}

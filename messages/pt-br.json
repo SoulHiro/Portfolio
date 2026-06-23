@@ -1,0 +1,66 @@
+{
+  "Metadata": {
+    "title": "Victor M. Santos — Desenvolvedor de Software & Designer de Produto",
+    "description": "Desenvolvedor de software e designer de produto criando experiências digitais com propósito."
+  },
+  "Nav": {
+    "about": "Sobre",
+    "projects": "Projetos",
+    "contact": "Contato",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu"
+  },
+  "Hero": {
+    "description": "Construindo produtos digitais com visão sistêmica — do problema de negócio à interface, passando pela arquitetura e experiência.",
+    "cta": "Entrar em contato"
+  },
+  "About": {
+    "label": "QUEM EU SOU",
+    "alt": "Victor M. Santos — Engenheiro de Software & Designer de Produto",
+    "subtitle": "Engenheiro de Software & Designer de Produto",
+    "bio1": "Meu primeiro contato com código foi aos 7 anos, montando servidores de Minecraft com um amigo. Depois veio Lua para criar servidores de Roblox, Python para bots no Discord, e o que começou como curiosidade de criança virou algo que eu simplesmente não consegui mais largar.",
+    "bio2": "Hoje passo a maior parte do tempo estudando, construindo e quebrando coisas até entender como funcionam por dentro. Gosto de compartilhar o que aprendo, acredito que ensinar é a melhor forma de realmente entender algo. Meu objetivo é ir o mais longe possível dentro da engenharia de software e, no caminho, construir coisas que façam diferença de verdade na vida das pessoas."
+  },
+  "Works": {
+    "title": "Trabalhos",
+    "titleHighlight": "selecionados",
+    "projects": "projetos"
+  },
+  "WorksPage": {
+    "label": "WORK",
+    "title": "Trabalhos",
+    "description": "Projetos que construí e coisas que escrevi — de produtos SaaS a reflexões sobre o ofício.",
+    "projectsLabel": "PROJETOS",
+    "projectsTitle": "Projetos selecionados",
+    "noProjects": "Nenhum projeto encontrado.",
+    "writingLabel": "ESCRITA",
+    "writingTitle": "Do blog",
+    "noPosts": "Nenhum post ainda.",
+    "readMin": "min de leitura"
+  },
+  "Footer": {
+    "copyright": "© {year} Victor M. Santos. Todos os direitos reservados.",
+    "whatsappMessage": "Oi Victor! Encontrei seu portfólio e adoraria conversar.",
+    "whatsappLabel": "Conversar no WhatsApp"
+  },
+  "TechStack": {
+    "label": "STACK",
+    "title": "Com o que",
+    "titleHighlight": "eu construo",
+    "description": "As ferramentas que uso ao criar produtos digitais, da interface à infraestrutura.",
+    "frontend": "Frontend",
+    "frontendDesc": "Construindo interfaces do design system à tela renderizada. React, Next.js e TypeScript são minhas ferramentas diárias, com foco em performance e acessibilidade.",
+    "backend": "Backend",
+    "backendDesc": "Projetando APIs e camadas de dados que aguentam carga real. Node.js, Go e PostgreSQL. Priorizo correção sobre inteligência.",
+    "tools": "Ferramentas & Infra",
+    "toolsDesc": "A camada de infraestrutura: da modelagem de conteúdo no Sanity à orquestração de containers e CI/CD. O que importa é o que vai para produção."
+  },
+  "Contact": {
+    "title1": "Vamos construir",
+    "titleHighlight": "algo",
+    "title2": "juntos.",
+    "description": "Tem um projeto em mente? Me chame no WhatsApp ou conecte nas redes sociais. Estou sempre aberto a novos desafios.",
+    "whatsappCta": "Conversar no WhatsApp",
+    "whatsappMessage": "Oi Victor! Encontrei seu portfólio e adoraria conversar."
+  }
+}

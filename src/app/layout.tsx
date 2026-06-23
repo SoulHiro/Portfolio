@@ -1,55 +1,63 @@
 import type { Metadata } from "next";
-import { DM_Sans, Instrument_Serif } from "next/font/google";
-import "./globals.css";
+import {
+  Outfit,
+  Instrument_Serif,
+  JetBrains_Mono,
+  Noto_Sans_KR,
+} from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { cn } from "@/lib/utils";
+import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
-  display: "swap",
-  variable: "--font-instrument-serif",
-  weight: "400",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const dmSanss = DM_Sans({
-  variable: "--font-dm-sans",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
+const notoSansKR = Noto_Sans_KR({
+  variable: "--font-noto-sans-kr",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: {
-    template: "%s | Victor M. Santos Portfolio",
-    default: "Victor M. Santos Portfolio",
-  },
-  description:
-    "Morning! My name is Victor, and I am a software engineer. Check out my portfolio!",
+  title: "Victor M. Santos",
+  description: "Software developer and product designer.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html
-      lang="en"
-      className={cn(
-        "h-full",
-        "antialiased",
-        dmSanss.className,
-        "font-sans",
-        instrumentSerif.variable,
-      )}
       suppressHydrationWarning
+      className={`${outfit.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${notoSansKR.variable} antialiased`}
     >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <body className="min-h-full flex flex-col">{children}</body>
-      </ThemeProvider>
+      <body className="min-h-screen flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

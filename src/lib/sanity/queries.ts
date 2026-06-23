@@ -1,0 +1,85 @@
+import { groq } from "next-sanity";
+
+export const PROJECTS_QUERY = groq`
+  *[_type == "project"] | order(order asc, publishedAt desc) {
+    _id,
+    title,
+    "tagline": select($locale == "en" => coalesce(tagline_en, tagline), tagline),
+    "slug": slug.current,
+    category,
+    year,
+    heroImage,
+    color,
+    featured,
+    order,
+    "stack": stack[].name
+  }
+`;
+
+export const PROJECT_BY_SLUG_QUERY = groq`
+  *[_type == "project" && slug.current == $slug][0] {
+    _id,
+    title,
+    "tagline": select($locale == "en" => coalesce(tagline_en, tagline), tagline),
+    "slug": slug.current,
+    category,
+    year,
+    duration,
+    client,
+    "role": select($locale == "en" => coalesce(role_en, role), role),
+    liveUrl,
+    color,
+    heroImage,
+    stack,
+    "challenge": select($locale == "en" => coalesce(challenge_en, challenge), challenge),
+    "approach": select($locale == "en" => coalesce(approach_en, approach), approach),
+    features,
+    gallery,
+    results,
+    testimonial,
+    publishedAt
+  }
+`;
+
+export const ALL_PROJECT_SLUGS_QUERY = groq`
+  *[_type == "project"] | order(order asc, publishedAt desc) {
+    "slug": slug.current
+  }
+`;
+
+export const POST_BY_SLUG_QUERY = groq`
+  *[_type == "post" && slug.current == $slug][0] {
+    _id,
+    title,
+    "titleHighlight": coalesce(titleHighlight, null),
+    "slug": slug.current,
+    "excerpt": select($locale == "en" => coalesce(excerpt_en, excerpt), excerpt),
+    "category": categories[0]->title,
+    estimatedReadingTime,
+    publishedAt,
+    tags,
+    author-> { name, handle },
+    "body": select(
+      $locale == "en" => coalesce(body_en, body),
+      body
+    )
+  }
+`;
+
+export const ALL_POST_SLUGS_QUERY = groq`
+  *[_type == "post" && defined(slug.current)] {
+    "slug": slug.current
+  }
+`;
+
+export const POSTS_QUERY = groq`
+  *[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    "excerpt": select($locale == "en" => coalesce(excerpt_en, excerpt), excerpt),
+    "category": categories[0]->title,
+    publishedAt,
+    estimatedReadingTime
+  }
+`;
