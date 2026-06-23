@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import { DM_Sans, Geist } from "next/font/google";
+import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const instrumentSerif = Instrument_Serif({
+  display: "swap",
+  variable: "--font-instrument-serif",
+  weight: "400",
+  subsets: ["latin"],
+});
 
 const dmSanss = DM_Sans({
   variable: "--font-dm-sans",
@@ -31,9 +36,9 @@ export default function RootLayout({
       className={cn(
         "h-full",
         "antialiased",
-        dmSanss.variable,
+        dmSanss.className,
         "font-sans",
-        geist.variable,
+        instrumentSerif.variable,
       )}
       suppressHydrationWarning
     >
