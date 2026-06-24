@@ -26,7 +26,7 @@ export default async function WorksPage({ params }: Props) {
   const postsFromSanity = await client.fetch<SanityPostListing[]>(
     POSTS_QUERY,
     { locale },
-    { cache: "no-store" },
+    { next: { tags: ["post"] } },
   );
 
   const posts = postsFromSanity.length > 0 ? postsFromSanity : [];

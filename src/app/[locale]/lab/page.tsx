@@ -31,12 +31,12 @@ export default async function LabPage({ params }: Props) {
     client.fetch<SanityLabSettings | null>(
       LAB_SETTINGS_QUERY,
       {},
-      { next: { revalidate: 3600 } },
+      { next: { tags: ["lab"] } },
     ),
     client.fetch<SanityLabStatus | null>(
       LAB_STATUS_QUERY,
       {},
-      { next: { revalidate: 300 } },
+      { next: { tags: ["lab"] } },
     ),
   ]);
 
@@ -46,7 +46,7 @@ export default async function LabPage({ params }: Props) {
     (await client.fetch<SanityLabProject | null>(
       LAB_PROJECT_FALLBACK_QUERY,
       {},
-      { next: { revalidate: 3600 } },
+      { next: { tags: ["lab"] } },
     ));
 
   // Fetch YouTube episodes via playlist ID stored on the project
