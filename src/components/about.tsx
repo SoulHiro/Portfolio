@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import Image from "next/image";
 import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 import { H2, P } from "@/components/ui/typography";
 
@@ -13,18 +12,7 @@ export async function About() {
       aria-labelledby="about-heading"
       className="relative flex flex-col w-full justify-center py-16 md:min-h-screen md:py-0 px-6 md:px-12 lg:px-24"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-        <div className="min-w-0 flex justify-center md:block">
-          <div className="relative size-48 rounded-full overflow-hidden md:size-auto md:rounded-none md:h-full">
-            <Image
-              src="/images/profile.webp"
-              alt={t("alt")}
-              fill
-              sizes="(min-width: 768px) 50vw, 192px"
-              className="object-cover"
-            />
-          </div>
-        </div>
+      <div className="max-w-xl">
         <div className="min-w-0 space-y-6 md:space-y-8 flex flex-col justify-center">
           <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/30 uppercase">
             {t("label")}
