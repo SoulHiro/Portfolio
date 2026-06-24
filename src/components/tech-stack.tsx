@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { H2, H3, P, Label } from "@/components/ui/typography";
+import { H2, H3, P } from "@/components/ui/typography";
 
 function Diamond({ filled = false }: { filled?: boolean }) {
   return (
@@ -75,12 +75,9 @@ export async function TechStack() {
       <div className="w-full h-px bg-border mb-8" />
 
       <div className="flex flex-col gap-4 mb-8 md:mb-12">
-        <div className="flex items-center gap-2.5">
-          <div className="w-16 h-px bg-muted-foreground" />
-          <Label size="sm" className="text-muted-foreground tracking-[4px]">
-            {t("label")}
-          </Label>
-        </div>
+        <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/30 uppercase">
+          {t("label")}
+        </span>
         <H2>
           {t("title")}{" "}
           <span className="font-display italic text-muted-foreground">

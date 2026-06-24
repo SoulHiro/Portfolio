@@ -26,10 +26,9 @@ export async function About() {
           </div>
         </div>
         <div className="min-w-0 space-y-6 md:space-y-8 flex flex-col justify-center">
-          <div className="flex gap-2 items-center">
-            <div className="h-0.5 w-12 bg-muted-foreground" />
-            <P size="md" className="text-muted-foreground font-semibold">{t("label")}</P>
-          </div>
+          <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/30 uppercase">
+            {t("label")}
+          </span>
           <div>
             <H2 id="about-heading">Victor M. Santos</H2>
             <P size="md" className="text-muted-foreground">{t("subtitle")}</P>

@@ -115,6 +115,18 @@ export const LAB_PROJECT_FALLBACK_QUERY = groq`
   }
 `;
 
+export const LATEST_POSTS_QUERY = groq`
+  *[_type == "post" && defined(slug.current)] | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    "excerpt": select($locale == "en" => coalesce(excerpt_en, excerpt), excerpt),
+    "category": coalesce(categories[0]->title, tags[0]),
+    publishedAt,
+    estimatedReadingTime
+  }
+`;
+
 export const RELATED_POSTS_QUERY = groq`
   *[_type == "post" && slug.current != $slug && defined(slug.current)] | order(publishedAt desc) [0...2] {
     _id,
