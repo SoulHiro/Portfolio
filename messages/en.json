@@ -5,7 +5,8 @@
   },
   "Nav": {
     "about": "About",
-    "projects": "Projects",
+    "devlog": "Devlog",
+    "lab": "Lab",
     "contact": "Contact",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
@@ -27,14 +28,9 @@
     "projects": "projects"
   },
   "WorksPage": {
-    "label": "WORKS",
-    "title": "Works",
-    "description": "Projects I've built and things I've written. From SaaS products to thoughts on craft.",
-    "projectsLabel": "PROJECTS",
-    "projectsTitle": "Selected projects",
-    "noProjects": "No projects found.",
-    "writingLabel": "WRITING",
-    "writingTitle": "From the blog",
+    "label": "DEVLOG",
+    "title": "Devlog",
+    "description": "Engineering in the open. Real code, real decisions, real trade-offs — documented as I build.",
     "noPosts": "No posts yet.",
     "readMin": "min read"
   },
@@ -54,6 +50,29 @@
     "backendDesc": "Designing APIs and data layers that hold up under real load. Node.js, Go, and PostgreSQL. I care about correctness over cleverness.",
     "tools": "Tools & Infra",
     "toolsDesc": "The infrastructure layer: from content modeling in Sanity to container orchestration and CI/CD. What ships is what matters."
+  },
+  "LabPage": {
+    "label": "LAB",
+    "title": "Lab",
+    "description": "Building in public. One project, documented from zero to production.",
+    "projectStatus": "Phase 1 — MVP",
+    "projectStatusLabel": "In progress",
+    "lastCommit": "Last commit",
+    "metricsCommits": "commits",
+    "metricsEpisodes": "episodes",
+    "metricsMembers": "members",
+    "episodesTitle": "DEVLOG EPISODES",
+    "archiveTitle": "PAST PROJECTS",
+    "watchEpisode": "Watch episode",
+    "roadmapTitle": "ROADMAP",
+    "phase1Title": "MVP",
+    "phase1Desc": "Core WhatsApp flow, onboarding, PGR survey engine",
+    "phase2Title": "Scale",
+    "phase2Desc": "Multi-tenant, billing, analytics dashboard",
+    "phase3Title": "Growth",
+    "phase3Desc": "Marketplace integrations, referral system",
+    "phase4Title": "Enterprise",
+    "phase4Desc": "Custom contracts, SLA, dedicated infrastructure"
   },
   "Contact": {
     "title1": "Let's build",

@@ -39,7 +39,8 @@ function NavItems() {
 
   const items = [
     { label: t("about"), href: "/#about", sectionId: "about" },
-    { label: t("projects"), href: "/works" },
+    { label: t("devlog"), href: "/works" },
+    { label: t("lab"), href: "/lab" },
     { label: t("contact"), href: "/#contact", sectionId: "contact" },
   ];
 
@@ -115,7 +116,8 @@ function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
   const items = [
     { label: t("about"), href: "/#about", sectionId: "about" },
-    { label: t("projects"), href: "/works" },
+    { label: t("devlog"), href: "/works" },
+    { label: t("lab"), href: "/lab" },
     { label: t("contact"), href: "/#contact", sectionId: "contact" },
   ];
 

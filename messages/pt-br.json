@@ -5,7 +5,8 @@
   },
   "Nav": {
     "about": "Sobre",
-    "projects": "Projetos",
+    "devlog": "Devlog",
+    "lab": "Lab",
     "contact": "Contato",
     "openMenu": "Abrir menu",
     "closeMenu": "Fechar menu"
@@ -27,14 +28,9 @@
     "projects": "projetos"
   },
   "WorksPage": {
-    "label": "WORK",
-    "title": "Trabalhos",
-    "description": "Projetos que construí e coisas que escrevi — de produtos SaaS a reflexões sobre o ofício.",
-    "projectsLabel": "PROJETOS",
-    "projectsTitle": "Projetos selecionados",
-    "noProjects": "Nenhum projeto encontrado.",
-    "writingLabel": "ESCRITA",
-    "writingTitle": "Do blog",
+    "label": "DEVLOG",
+    "title": "Devlog",
+    "description": "Engenharia em público. Código real, decisões reais, trade-offs reais — documentados enquanto construo.",
     "noPosts": "Nenhum post ainda.",
     "readMin": "min de leitura"
   },
@@ -54,6 +50,29 @@
     "backendDesc": "Projetando APIs e camadas de dados que aguentam carga real. Node.js, Go e PostgreSQL. Priorizo correção sobre inteligência.",
     "tools": "Ferramentas & Infra",
     "toolsDesc": "A camada de infraestrutura: da modelagem de conteúdo no Sanity à orquestração de containers e CI/CD. O que importa é o que vai para produção."
+  },
+  "LabPage": {
+    "label": "LAB",
+    "title": "Lab",
+    "description": "Construindo em público. Um projeto, documentado do zero à produção.",
+    "projectStatus": "Fase 1 — MVP",
+    "projectStatusLabel": "Em andamento",
+    "lastCommit": "Último commit",
+    "metricsCommits": "commits",
+    "metricsEpisodes": "episódios",
+    "metricsMembers": "membros",
+    "episodesTitle": "EPISÓDIOS DO DEVLOG",
+    "archiveTitle": "PROJETOS ANTERIORES",
+    "watchEpisode": "Assistir episódio",
+    "roadmapTitle": "ROADMAP",
+    "phase1Title": "MVP",
+    "phase1Desc": "Fluxo WhatsApp, onboarding, motor de pesquisa PGR",
+    "phase2Title": "Escala",
+    "phase2Desc": "Multi-tenant, cobrança, dashboard de analytics",
+    "phase3Title": "Crescimento",
+    "phase3Desc": "Integrações com marketplace, sistema de indicação",
+    "phase4Title": "Enterprise",
+    "phase4Desc": "Contratos customizados, SLA, infraestrutura dedicada"
   },
   "Contact": {
     "title1": "Vamos construir",
