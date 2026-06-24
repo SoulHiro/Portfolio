@@ -84,6 +84,7 @@ export default function RootLayout({
 }) {
   return (
     <html
+      lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={`${outfit.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${notoSansKR.variable} antialiased`}

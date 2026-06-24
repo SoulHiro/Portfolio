@@ -15,10 +15,44 @@ import { fetchPlaylistEpisodes } from "@/lib/sanity/youtube";
 
 type Props = { params: Promise<{ locale: string }> };
 
+const BASE_URL = "https://www.victormts.dev";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "LabPage" });
-  return { title: t("title") };
+  const otherLocale = locale === "en" ? "pt-br" : "en";
+  const pageUrl = `${BASE_URL}/${locale}/lab`;
+  const altUrl = `${BASE_URL}/${otherLocale}/lab`;
+  const ogImage = `${BASE_URL}/og.webp`;
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    openGraph: {
+      type: "website",
+      url: pageUrl,
+      locale: locale === "pt-br" ? "pt_BR" : "en_US",
+      siteName: "Victor M. Santos",
+      title: t("title"),
+      description: t("description"),
+      images: [{ url: ogImage, width: 1200, height: 630, alt: t("title") }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@victormts_dev",
+      title: t("title"),
+      description: t("description"),
+      images: [ogImage],
+    },
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        en: locale === "en" ? pageUrl : altUrl,
+        "pt-BR": locale === "pt-br" ? pageUrl : altUrl,
+        "x-default": `${BASE_URL}/en/lab`,
+      },
+    },
+  };
 }
 
 export default async function LabPage({ params }: Props) {

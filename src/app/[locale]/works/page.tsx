@@ -10,11 +10,44 @@ import { WorksContent } from "@/components/works-content";
 
 type Props = { params: Promise<{ locale: string }> };
 
+const BASE_URL = "https://www.victormts.dev";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "WorksPage" });
-  return { title: t("title") };
+  const otherLocale = locale === "en" ? "pt-br" : "en";
+  const pageUrl = `${BASE_URL}/${locale}/works`;
+  const altUrl = `${BASE_URL}/${otherLocale}/works`;
+  const ogImage = `${BASE_URL}/og.webp`;
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    openGraph: {
+      type: "website",
+      url: pageUrl,
+      locale: locale === "pt-br" ? "pt_BR" : "en_US",
+      siteName: "Victor M. Santos",
+      title: t("title"),
+      description: t("description"),
+      images: [{ url: ogImage, width: 1200, height: 630, alt: t("title") }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@victormts_dev",
+      title: t("title"),
+      description: t("description"),
+      images: [ogImage],
+    },
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        en: locale === "en" ? pageUrl : altUrl,
+        "pt-BR": locale === "pt-br" ? pageUrl : altUrl,
+        "x-default": `${BASE_URL}/en/works`,
+      },
+    },
+  };
 }
 
 export default async function WorksPage({ params }: Props) {
@@ -31,7 +64,25 @@ export default async function WorksPage({ params }: Props) {
 
   const posts = postsFromSanity.length > 0 ? postsFromSanity : [];
 
+  const blogLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `${t("title")} — Victor M. Santos`,
+    url: `${BASE_URL}/${locale}/works`,
+    description: t("description"),
+    author: {
+      "@type": "Person",
+      "@id": `${BASE_URL}/#person`,
+      name: "Victor M. Santos",
+    },
+  };
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogLd) }}
+      />
     <section className="flex flex-col gap-16 py-24 px-6 md:px-12 lg:px-24">
       {/* Header */}
       <div>
@@ -56,5 +107,6 @@ export default async function WorksPage({ params }: Props) {
         />
       </Suspense>
     </section>
+    </>
   );
 }

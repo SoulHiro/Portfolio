@@ -17,22 +17,56 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-const BASE_URL = "https://www.victormts.dev";
-
 /* ─── Static params ─── */
 export async function generateStaticParams() {
   const slugs = await client.fetch<{ slug: string }[]>(ALL_POST_SLUGS_QUERY);
   return slugs.map((s) => ({ slug: s.slug }));
 }
 
+const BASE_META_URL = "https://www.victormts.dev";
+
 /* ─── Metadata ─── */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = await client.fetch<SanityPostFull | null>(POST_BY_SLUG_QUERY, { slug, locale });
   if (!post) return {};
+
+  const otherLocale = locale === "en" ? "pt-br" : "en";
+  const postUrl = `${BASE_META_URL}/${locale}/works/${post.slug}`;
+  const altUrl = `${BASE_META_URL}/${otherLocale}/works/${post.slug}`;
+  const ogImage = `${BASE_META_URL}/og.webp`;
+
   return {
     title: post.title,
     description: post.excerpt ?? undefined,
+    authors: [{ name: "Victor M. Santos", url: BASE_META_URL }],
+    openGraph: {
+      type: "article",
+      url: postUrl,
+      locale: locale === "pt-br" ? "pt_BR" : "en_US",
+      siteName: "Victor M. Santos",
+      title: post.title,
+      description: post.excerpt ?? undefined,
+      publishedTime: post.publishedAt,
+      authors: ["Victor M. Santos"],
+      tags: post.tags ?? undefined,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@victormts_dev",
+      title: post.title,
+      description: post.excerpt ?? undefined,
+      images: [ogImage],
+    },
+    alternates: {
+      canonical: postUrl,
+      languages: {
+        en: locale === "en" ? postUrl : altUrl,
+        "pt-BR": locale === "pt-br" ? postUrl : altUrl,
+        "x-default": `${BASE_META_URL}/en/works/${post.slug}`,
+      },
+    },
   };
 }
 
@@ -85,26 +119,36 @@ export default async function PostPage({ params }: Props) {
 
   const sections = extractSections(post.body);
 
-  const postUrl = `${BASE_URL}/${locale}/works/${post.slug}`;
+  const postUrl = `${BASE_META_URL}/${locale}/works/${post.slug}`;
+  const worksUrl = `${BASE_META_URL}/${locale}/works`;
+  const homeUrl = `${BASE_META_URL}/${locale}`;
+  const personId = `${BASE_META_URL}/#person`;
   const blogPostingLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt ?? undefined,
-    url: postUrl,
-    datePublished: post.publishedAt,
-    author: {
-      "@type": "Person",
-      "@id": `${BASE_URL}/#person`,
-      name: "Victor M. Santos",
-    },
-    publisher: {
-      "@type": "Person",
-      "@id": `${BASE_URL}/#person`,
-      name: "Victor M. Santos",
-    },
-    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
-    ...(post.tags ? { keywords: post.tags.join(", ") } : {}),
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${postUrl}#article`,
+        headline: post.title,
+        description: post.excerpt ?? undefined,
+        url: postUrl,
+        datePublished: post.publishedAt,
+        dateModified: post.publishedAt,
+        image: `${BASE_META_URL}/og.webp`,
+        author: { "@type": "Person", "@id": personId, name: "Victor M. Santos" },
+        publisher: { "@type": "Person", "@id": personId, name: "Victor M. Santos" },
+        mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+        ...(post.tags ? { keywords: post.tags.join(", ") } : {}),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: homeUrl },
+          { "@type": "ListItem", position: 2, name: "Works", item: worksUrl },
+          { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+        ],
+      },
+    ],
   };
 
   return (
