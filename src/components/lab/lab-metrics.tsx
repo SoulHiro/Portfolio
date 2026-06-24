@@ -1,18 +1,23 @@
 import { Stat } from "@/components/ui/typography";
 
-// Update these as the project progresses
-const COMMITS = "247";
-const EPISODES = "6";
-
-export function LabMetrics({
-  labels,
-}: {
+type LabMetricsProps = {
   labels: { commits: string; episodes: string };
-}) {
+  commitsCount: number | null;
+  episodesCount: number;
+};
+
+export function LabMetrics({ labels, commitsCount, episodesCount }: LabMetricsProps) {
+  const hasMetrics = commitsCount != null || episodesCount > 0;
+  if (!hasMetrics) return null;
+
   return (
     <div className="flex gap-12 md:gap-20">
-      <Stat value={COMMITS} title={labels.commits} />
-      <Stat value={EPISODES} title={labels.episodes} />
+      {commitsCount != null && (
+        <Stat value={String(commitsCount)} title={labels.commits} />
+      )}
+      {episodesCount > 0 && (
+        <Stat value={String(episodesCount)} title={labels.episodes} />
+      )}
     </div>
   );
 }

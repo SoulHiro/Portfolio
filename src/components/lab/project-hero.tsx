@@ -1,13 +1,12 @@
 import { GitCommitHorizontal } from "lucide-react";
-
-const GITHUB_REPO = "SoulHiro/campomind";
+import type { SanityLabProject } from "@/lib/sanity/types";
 
 type LastCommit = { message: string; relativeTime: string } | null;
 
-async function fetchLastCommit(): Promise<LastCommit> {
+async function fetchLastCommit(repo: string): Promise<LastCommit> {
   try {
     const res = await fetch(
-      `https://api.github.com/repos/${GITHUB_REPO}/commits?per_page=1`,
+      `https://api.github.com/repos/${repo}/commits?per_page=1`,
       { next: { revalidate: 3600 } },
     );
     if (!res.ok) return null;
@@ -28,37 +27,33 @@ async function fetchLastCommit(): Promise<LastCommit> {
   }
 }
 
-const TECH = [
-  "TypeScript", "Go", "Next.js 15", "React 19", "Tailwind 4",
-  "Fastify", "PostgreSQL", "Redis", "Prisma", "shadcn/ui",
-  "motion/react", "Docker", "Vercel", "Sanity", "Stripe", "WhatsApp API",
-];
+type ProjectHeroProps = {
+  project: SanityLabProject;
+};
 
-export async function ProjectHero() {
-  const lastCommit = await fetchLastCommit();
+export async function ProjectHero({ project }: ProjectHeroProps) {
+  const lastCommit = project.githubRepo
+    ? await fetchLastCommit(project.githubRepo)
+    : null;
+
+  const tech = project.technologies ?? [];
 
   return (
     <div className="flex flex-col gap-8">
+      {project.architectureNotes && (
+        <div className="flex flex-col gap-3 max-w-2xl">
+          <p className="text-body-md text-foreground leading-relaxed">
+            {project.architectureNotes}
+          </p>
+        </div>
+      )}
 
-      {/* Decisões arquiteturais — o "por quê", não o "o quê" */}
-      <div className="flex flex-col gap-3 max-w-2xl">
-        <p className="text-body-md text-foreground leading-relaxed">
-          Go cuida do webhook layer: o WhatsApp exige resposta em menos de 200ms
-          ou reenvia o evento, e a concorrência nativa elimina overhead de thread
-          sem pool manual. O isolamento entre tenants é feito via row-level
-          security no PostgreSQL — nenhum filtro na aplicação, o banco rejeita
-          queries que cruzam fronteiras. Geração de PGR agrega meses de dados;
-          vai pra fila no Redis e processa em background enquanto o colaborador
-          recebe confirmação instantânea no WhatsApp.
+      {tech.length > 0 && (
+        <p className="font-mono text-label-xs text-muted-foreground/35 leading-loose">
+          {tech.join("  ·  ")}
         </p>
-      </div>
+      )}
 
-      {/* Inventário técnico compacto */}
-      <p className="font-mono text-label-xs text-muted-foreground/35 leading-loose">
-        {TECH.join("  ·  ")}
-      </p>
-
-      {/* Último commit */}
       {lastCommit && (
         <div className="flex items-center gap-2 pt-2 border-t border-border/40">
           <GitCommitHorizontal className="size-3.5 text-muted-foreground/25 shrink-0" />

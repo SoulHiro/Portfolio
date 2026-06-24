@@ -1,4 +1,7 @@
-import { BUILD_STATUS } from "@/data/build-status";
+type BuildStatusProps = {
+  body: string;
+  updatedAt: string;
+};
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("pt-BR", {
@@ -8,7 +11,7 @@ function formatDate(iso: string): string {
   });
 }
 
-export function BuildStatus() {
+export function BuildStatus({ body, updatedAt }: BuildStatusProps) {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-baseline gap-4">
@@ -16,12 +19,12 @@ export function BuildStatus() {
           SITUAÇÃO ATUAL
         </span>
         <span className="font-mono text-label-xs text-muted-foreground/25">
-          {formatDate(BUILD_STATUS.updatedAt)}
+          {formatDate(updatedAt)}
         </span>
       </div>
 
       <p className="text-body-lg text-foreground/80 leading-relaxed max-w-2xl font-light">
-        {BUILD_STATUS.body}
+        {body}
       </p>
     </div>
   );

@@ -8,7 +8,10 @@ import { LabMetrics } from "@/components/lab/lab-metrics";
 import { EpisodeList } from "@/components/lab/episode-list";
 import { PastProjects } from "@/components/lab/past-projects";
 import { LatestEpisodePeek } from "@/components/lab/latest-episode-peek";
-import { latestEpisode } from "@/data/episodes";
+import { client } from "@/lib/sanity/client";
+import { LAB_SETTINGS_QUERY, LAB_STATUS_QUERY } from "@/lib/sanity/queries";
+import type { SanityLabSettings, SanityLabStatus } from "@/lib/sanity/types";
+import { fetchPlaylistEpisodes } from "@/lib/sanity/youtube";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -21,8 +24,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LabPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-
   const t = await getTranslations("LabPage");
+
+  // Fetch Sanity data in parallel
+  const [settings, labStatus] = await Promise.all([
+    client.fetch<SanityLabSettings | null>(
+      LAB_SETTINGS_QUERY,
+      {},
+      { next: { revalidate: 3600 } },
+    ),
+    client.fetch<SanityLabStatus | null>(
+      LAB_STATUS_QUERY,
+      {},
+      { next: { revalidate: 300 } },
+    ),
+  ]);
+
+  const project = settings?.featuredProject ?? null;
+
+  // Fetch YouTube episodes if playlist configured
+  const episodes = settings?.youtubePlaylistId
+    ? await fetchPlaylistEpisodes(settings.youtubePlaylistId)
+    : [];
+
+  const latestEpisode = episodes.length > 0 ? episodes[episodes.length - 1] : null;
+  const roadmapSteps = project?.roadmap ?? [];
 
   return (
     <section className="flex flex-col gap-20 py-24 px-6 md:px-12 lg:px-24">
@@ -32,7 +58,6 @@ export default async function LabPage({ params }: Props) {
         <div className="w-full h-px bg-border" />
 
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-          {/* Esquerda: identidade do projeto */}
           <div className="flex flex-col gap-4 flex-1">
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1.5">
@@ -50,42 +75,44 @@ export default async function LabPage({ params }: Props) {
               </Label>
             </div>
 
-            <H1 className="text-display-xl">CampoMind</H1>
+            <H1 className="text-display-xl">
+              {project?.name ?? "CampoMind"}
+            </H1>
 
             <P className="text-muted-foreground max-w-xl">
-              Plataforma de saúde mental para o agronegócio via WhatsApp.
-              Automatiza a geração do PGR conforme a NR-1 e acompanha o
-              bem-estar dos colaboradores rurais — documentado do zero à
-              produção, em público.
+              {project?.description ??
+                "Plataforma de saúde mental para o agronegócio via WhatsApp. Documentada do zero à produção, em público."}
             </P>
           </div>
 
-          {/* Direita: último episódio */}
           {latestEpisode && <LatestEpisodePeek episode={latestEpisode} />}
         </div>
       </div>
 
-      {/* 2 — Roadmap: onde está e para onde vai */}
-      <PhaseRoadmap label={t("roadmapTitle")} />
+      {/* 2 — Roadmap */}
+      {roadmapSteps.length > 0 && (
+        <PhaseRoadmap label={t("roadmapTitle")} steps={roadmapSteps} />
+      )}
 
-      {/* 3 — Situação atual: o que está sendo trabalhado agora */}
-      <BuildStatus />
+      {/* 3 — Situação atual */}
+      {labStatus && (
+        <BuildStatus body={labStatus.body} updatedAt={labStatus.updatedAt} />
+      )}
 
-      {/* 4 — Episódios: o conteúdo do build in public */}
-      <EpisodeList label={t("episodesTitle")} />
+      {/* 4 — Episódios */}
+      <EpisodeList label={t("episodesTitle")} episodes={episodes} />
 
-      {/* 5 — Arquitetura: decisões técnicas + stack compacta */}
-      <ProjectHero />
+      {/* 5 — Arquitetura */}
+      {project && <ProjectHero project={project} />}
 
-      {/* 6 — Prova: commits e episódios com contexto */}
+      {/* 6 — Métricas */}
       <LabMetrics
-        labels={{
-          commits: t("metricsCommits"),
-          episodes: t("metricsEpisodes"),
-        }}
+        labels={{ commits: t("metricsCommits"), episodes: t("metricsEpisodes") }}
+        commitsCount={project?.commitsCount ?? null}
+        episodesCount={episodes.length}
       />
 
-      {/* 7 — Histórico: projetos anteriores */}
+      {/* 7 — Histórico */}
       <PastProjects label={t("archiveTitle")} />
 
     </section>

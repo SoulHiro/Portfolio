@@ -4,10 +4,14 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "motion/react";
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { EpisodePlayer } from "./episode-player";
-import { EPISODES } from "@/data/episodes";
-export type { Episode } from "@/data/episodes";
+import type { YoutubeEpisode } from "@/lib/sanity/youtube";
 
-export function EpisodeList({ label }: { label: string }) {
+type EpisodeListProps = {
+  label: string;
+  episodes: YoutubeEpisode[];
+};
+
+export function EpisodeList({ label, episodes }: EpisodeListProps) {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -32,14 +36,14 @@ export function EpisodeList({ label }: { label: string }) {
     el.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" });
   };
 
-  if (EPISODES.length === 0) {
+  if (episodes.length === 0) {
     return (
       <div className="flex flex-col gap-5">
         <span className="text-label-xs tracking-[3px] text-muted-foreground/50 font-semibold">
           {label}
         </span>
         <p className="text-body-sm text-muted-foreground/35 italic">
-          Nenhum episódio ainda — o primeiro sai em breve.
+          Episódios em breve — acompanhe pelo YouTube.
         </p>
       </div>
     );
@@ -47,15 +51,13 @@ export function EpisodeList({ label }: { label: string }) {
 
   return (
     <div className="flex flex-col gap-5">
-
-      {/* Header: label + count + arrows */}
       <div className="flex items-center justify-between">
         <div className="flex items-baseline gap-4">
           <span className="text-label-xs tracking-[3px] text-muted-foreground/50 font-semibold">
             {label}
           </span>
           <span className="font-mono text-label-xs text-muted-foreground/25">
-            {EPISODES.length} ep.
+            {episodes.length} ep.
           </span>
         </div>
 
@@ -79,16 +81,15 @@ export function EpisodeList({ label }: { label: string }) {
         </div>
       </div>
 
-      {/* Scroll track */}
       <div
         ref={scrollRef}
         onScroll={updateScrollState}
         className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory"
       >
         <div className="flex gap-4">
-          {EPISODES.map((ep, i) => (
+          {episodes.map((ep, i) => (
             <motion.button
-              key={ep.id}
+              key={ep.videoId}
               data-card
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -96,10 +97,9 @@ export function EpisodeList({ label }: { label: string }) {
               onClick={() => setActiveVideoId(ep.videoId)}
               className="group shrink-0 w-64 md:w-72 lg:w-80 snap-start text-left flex flex-col border border-border overflow-hidden hover:border-foreground/25 transition-colors duration-200 cursor-pointer"
             >
-              {/* Thumbnail */}
               <div className="relative aspect-video w-full overflow-hidden bg-muted shrink-0">
                 <img
-                  src={`https://img.youtube.com/vi/${ep.videoId}/hqdefault.jpg`}
+                  src={ep.thumbnail}
                   alt={ep.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -110,10 +110,10 @@ export function EpisodeList({ label }: { label: string }) {
                 </div>
               </div>
 
-              {/* Info */}
               <div className="flex flex-col gap-1.5 p-4 flex-1">
                 <span className="font-mono text-label-xs text-muted-foreground/35">
-                  EP {String(ep.number).padStart(2, "0")} · {ep.duration}
+                  EP {String(ep.position).padStart(2, "0")}
+                  {ep.duration && ` · ${ep.duration}`}
                 </span>
                 <span className="text-body-sm font-medium leading-snug line-clamp-2 group-hover:text-foreground transition-colors duration-200">
                   {ep.title}
@@ -122,7 +122,6 @@ export function EpisodeList({ label }: { label: string }) {
             </motion.button>
           ))}
 
-          {/* Trailing spacer so last card scrolls fully into view */}
           <div className="shrink-0 w-1" aria-hidden />
         </div>
       </div>
