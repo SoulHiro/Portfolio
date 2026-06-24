@@ -178,21 +178,11 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-border) transparent;
+    scrollbar-width: none;
   }
 
   html::-webkit-scrollbar {
-    width: 2px;
-  }
-
-  html::-webkit-scrollbar-track {
-    background: var(--color-background);
-  }
-
-  html::-webkit-scrollbar-thumb {
-    background-color: oklch(0.6 0 0 / 0.25);
-    border-radius: 0;
+    display: none;
   }
 
   * {

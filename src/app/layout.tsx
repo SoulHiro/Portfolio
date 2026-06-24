@@ -5,6 +5,7 @@ import {
   JetBrains_Mono,
   Noto_Sans_KR,
 } from "next/font/google";
+import { getLocale } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -77,14 +78,17 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const lang = locale === "pt-br" ? "pt-BR" : locale;
+
   return (
     <html
-      lang="en"
+      lang={lang}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={`${outfit.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${notoSansKR.variable} antialiased`}
