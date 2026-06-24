@@ -1,14 +1,15 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ConsoleEgg } from "@/components/easter-eggs/console-egg";
-import { LogoEgg } from "@/components/easter-eggs/logo-egg";
 import { KonamiEgg } from "@/components/easter-eggs/konami-egg";
+import { LogoEgg } from "@/components/easter-eggs/logo-egg";
+import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
+import { routing } from "@/i18n/routing";
 
 type Props = {
   children: React.ReactNode;
@@ -38,7 +39,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Victor M. Santos",
       title: t("title"),
       description: t("description"),
-      images: [{ url: `${BASE_URL}/og.webp`, width: 1200, height: 630, alt: t("title") }],
+      images: [
+        {
+          url: `${BASE_URL}/og.webp`,
+          width: 1200,
+          height: 630,
+          alt: t("title"),
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -80,6 +88,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <main className="flex-1 w-full max-w-7xl mx-auto">{children}</main>
         <Footer />
       </NuqsAdapter>
+      <Analytics />
     </NextIntlClientProvider>
   );
 }
