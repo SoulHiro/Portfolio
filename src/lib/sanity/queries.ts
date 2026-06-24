@@ -86,22 +86,32 @@ export const POSTS_QUERY = groq`
 
 // ─── Lab ──────────────────────────────────────────────────────────────────────
 
+const LAB_PROJECT_FIELDS = groq`
+  _id,
+  name,
+  description,
+  architectureNotes,
+  technologies,
+  liveUrl,
+  githubRepo,
+  commitsCount,
+  "roadmap": roadmap[] | order(phase asc) {
+    phase, title, description, status
+  }
+`;
+
+// Busca via singleton de configurações (quando existe featuredProject selecionado)
 export const LAB_SETTINGS_QUERY = groq`
   *[_type == "labSettings" && _id == "labSettings-singleton"][0] {
-    "featuredProject": featuredProject-> {
-      _id,
-      name,
-      description,
-      architectureNotes,
-      technologies,
-      liveUrl,
-      githubRepo,
-      commitsCount,
-      "roadmap": roadmap[] | order(phase asc) {
-        phase, title, description, status
-      }
-    },
+    "featuredProject": featuredProject-> { ${LAB_PROJECT_FIELDS} },
     youtubePlaylistId
+  }
+`;
+
+// Fallback: pega o primeiro labProject publicado diretamente
+export const LAB_PROJECT_FALLBACK_QUERY = groq`
+  *[_type == "labProject"] | order(_createdAt asc) [0] {
+    ${LAB_PROJECT_FIELDS}
   }
 `;
 

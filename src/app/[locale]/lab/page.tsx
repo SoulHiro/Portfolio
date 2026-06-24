@@ -9,8 +9,8 @@ import { EpisodeList } from "@/components/lab/episode-list";
 import { PastProjects } from "@/components/lab/past-projects";
 import { LatestEpisodePeek } from "@/components/lab/latest-episode-peek";
 import { client } from "@/lib/sanity/client";
-import { LAB_SETTINGS_QUERY, LAB_STATUS_QUERY } from "@/lib/sanity/queries";
-import type { SanityLabSettings, SanityLabStatus } from "@/lib/sanity/types";
+import { LAB_SETTINGS_QUERY, LAB_PROJECT_FALLBACK_QUERY, LAB_STATUS_QUERY } from "@/lib/sanity/queries";
+import type { SanityLabSettings, SanityLabProject, SanityLabStatus } from "@/lib/sanity/types";
 import { fetchPlaylistEpisodes } from "@/lib/sanity/youtube";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -40,7 +40,14 @@ export default async function LabPage({ params }: Props) {
     ),
   ]);
 
-  const project = settings?.featuredProject ?? null;
+  // Se não há labSettings configurado, usa o primeiro projeto cadastrado
+  const project: SanityLabProject | null =
+    settings?.featuredProject ??
+    (await client.fetch<SanityLabProject | null>(
+      LAB_PROJECT_FALLBACK_QUERY,
+      {},
+      { next: { revalidate: 3600 } },
+    ));
 
   // Fetch YouTube episodes if playlist configured
   const episodes = settings?.youtubePlaylistId
