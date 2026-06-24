@@ -75,14 +75,13 @@ export default async function LabPage({ params }: Props) {
               </Label>
             </div>
 
-            <H1 className="text-display-xl">
-              {project?.name ?? "CampoMind"}
-            </H1>
+            {project?.name && (
+              <H1 className="text-display-xl">{project.name}</H1>
+            )}
 
-            <P className="text-muted-foreground max-w-xl">
-              {project?.description ??
-                "Plataforma de saúde mental para o agronegócio via WhatsApp. Documentada do zero à produção, em público."}
-            </P>
+            {project?.description && (
+              <P className="text-muted-foreground max-w-xl">{project.description}</P>
+            )}
           </div>
 
           {latestEpisode && <LatestEpisodePeek episode={latestEpisode} />}
