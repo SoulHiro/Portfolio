@@ -2,7 +2,8 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { client } from "@/lib/sanity/client";
-import { POST_BY_SLUG_QUERY, ALL_POST_SLUGS_QUERY } from "@/lib/sanity/queries";
+import { POST_BY_SLUG_QUERY, ALL_POST_SLUGS_QUERY, RELATED_POSTS_QUERY } from "@/lib/sanity/queries";
+import type { SanityPostListing } from "@/lib/sanity/types";
 import type { SanityPostFull } from "@/lib/sanity/types";
 import { H1, P, Label } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
@@ -11,6 +12,7 @@ import { ProgressRead } from "@/components/progress-read";
 import { PostBody } from "@/components/post-body";
 import { PostSidebarShare } from "@/components/post-sidebar-share";
 import { PostSidebarToc, type TocSection } from "@/components/post-sidebar-toc";
+import { PostRelated } from "@/components/post-related";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -382,11 +384,18 @@ export default async function PostPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const post = await client.fetch<SanityPostFull | null>(
-    POST_BY_SLUG_QUERY,
-    { slug, locale },
-    { next: { revalidate: 3600 } },
-  );
+  const [post, relatedPosts] = await Promise.all([
+    client.fetch<SanityPostFull | null>(
+      POST_BY_SLUG_QUERY,
+      { slug, locale },
+      { next: { tags: ["post"] } },
+    ),
+    client.fetch<SanityPostListing[]>(
+      RELATED_POSTS_QUERY,
+      { slug, locale },
+      { next: { tags: ["post"] } },
+    ),
+  ]);
 
   const data = post ?? (slug === "building-systemic-vision" ? MOCK_POST : null);
   if (!data) notFound();
@@ -478,6 +487,13 @@ export default async function PostPage({ params }: Props) {
             )}
           </div>
         </div>
+
+        {/* Related posts + back button */}
+        <PostRelated
+          posts={relatedPosts ?? []}
+          backLabel="Voltar ao devlog"
+          backHref="/works"
+        />
       </article>
     </>
   );
