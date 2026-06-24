@@ -26,7 +26,7 @@ export default async function WorksPage({ params }: Props) {
   const postsFromSanity = await client.fetch<SanityPostListing[]>(
     POSTS_QUERY,
     { locale },
-    { next: { revalidate: 3600 } },
+    { cache: "no-store" },
   );
 
   const posts = postsFromSanity.length > 0 ? postsFromSanity : [];
