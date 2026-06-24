@@ -197,6 +197,13 @@
 
   * {
     @apply border-border outline-ring/50;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  img, a {
+    -webkit-user-drag: none;
+    user-drag: none;
   }
 
   body {

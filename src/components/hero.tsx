@@ -1,10 +1,10 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
-import { motion, useScroll, useTransform } from "motion/react";
 import { MoveRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useTranslations } from "next-intl";
 import { H1, Label, P, Small } from "@/components/ui/typography";
+import { Link } from "@/i18n/navigation";
 
 export function Hero() {
   const t = useTranslations("Hero");
@@ -19,7 +19,10 @@ export function Hero() {
       style={{ opacity: sectionOpacity }}
     >
       {/* Background lines */}
-      <div className="absolute inset-0 opacity-20 -z-10 pointer-events-none" aria-hidden="true">
+      <div
+        className="absolute inset-0 opacity-20 -z-10 pointer-events-none"
+        aria-hidden="true"
+      >
         <div className="absolute left-[20%] inset-y-0 w-px bg-linear-to-b from-background via-muted-foreground to-background" />
         <div className="absolute left-1/2 inset-y-0 w-px bg-linear-to-b from-background via-muted-foreground to-background" />
         <div className="absolute left-[80%] inset-y-0 w-px bg-linear-to-b from-background via-muted-foreground to-background" />
@@ -29,8 +32,8 @@ export function Hero() {
       <div className="flex flex-col flex-1 justify-center gap-10 md:gap-16">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-16 h-px bg-muted-foreground" />
-            <Label size="md" className="text-muted-foreground">
+            <div className="hidden md:block w-16 h-px bg-muted-foreground" />
+            <Label size="sm" className="text-muted-foreground md:text-label-md">
               Software Developer & Product Designer
             </Label>
           </div>
@@ -56,7 +59,9 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <div className="flex flex-col items-center gap-3 pb-8">
-        <Small size="xs" className="tracking-[1.12px] text-muted-foreground">SCROLL</Small>
+        <Small size="xs" className="tracking-[1.12px] text-muted-foreground">
+          SCROLL
+        </Small>
         <motion.div
           className="w-px h-8 bg-muted-foreground opacity-20 origin-top"
           style={{ scaleY: scrollLineScale }}
@@ -64,7 +69,7 @@ export function Hero() {
       </div>
 
       {/* Year */}
-      <span className="absolute bottom-48 left-[55%] font-display tracking-tight text-display-year leading-none text-transparent [-webkit-text-stroke:1px_var(--border)] select-none">
+      <span className="absolute top-[58%] md:top-auto md:bottom-48 left-[60%] md:left-[55%] font-display tracking-tight text-display-year leading-none text-transparent [-webkit-text-stroke:1px_var(--border)] select-none">
         2026
       </span>
     </motion.section>
