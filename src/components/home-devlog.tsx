@@ -26,7 +26,7 @@ export async function HomeDevlog({ locale }: { locale: string }) {
       {/* Header */}
       <div className="flex items-end justify-between gap-6">
         <div className="flex flex-col gap-3">
-          <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/30 uppercase">
+          <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/50 dark:text-muted-foreground/30 uppercase">
             Devlog
           </span>
           <h2 className="font-display text-display-md tracking-tight leading-tight">
@@ -39,7 +39,7 @@ export async function HomeDevlog({ locale }: { locale: string }) {
           className="hidden sm:inline-flex items-center gap-1.5 text-label-sm text-muted-foreground hover:text-foreground transition-colors duration-300 shrink-0 mt-1"
         >
           Ver todos
-          <MoveRight className="size-3.5 -rotate-45" />
+          <MoveRight className="size-3.5" />
         </Link>
       </div>
 
@@ -51,23 +51,23 @@ export async function HomeDevlog({ locale }: { locale: string }) {
           <div key={post._id}>
             <Link
               href={`/works/${post.slug}`}
-              className="group grid items-center gap-x-6 py-5 transition-colors duration-200 hover:bg-foreground/[0.03] -mx-4 px-4 rounded-sm
+              className="group grid items-center gap-x-6 py-5 -mx-4 px-4 rounded-sm
                 grid-cols-[2rem_1fr_1.5rem]
                 md:grid-cols-[2rem_8rem_1fr_auto_1.5rem]"
             >
               {/* Col 1 — Number */}
-              <span className="font-mono text-label-xs text-muted-foreground/30">
+              <span className="font-mono text-label-xs text-muted-foreground/30 group-hover:text-muted-foreground/60 transition-colors duration-200">
                 {String(i + 1).padStart(2, "0")}
               </span>
 
               {/* Col 2 — Category (desktop only) */}
-              <span className="hidden md:inline-flex self-center border border-border text-label-xs text-muted-foreground px-3 py-1 rounded-full w-fit">
+              <span className="hidden md:inline-flex self-center border border-border text-label-xs text-muted-foreground group-hover:text-foreground/60 transition-colors duration-200 px-3 py-1 rounded-full w-fit">
                 {post.category ?? "—"}
               </span>
 
               {/* Col 3 — Title + excerpt */}
               <div className="flex flex-col gap-1 min-w-0">
-                <h3 className="font-display text-h4 tracking-tight leading-tight truncate">
+                <h3 className="font-display text-h4 tracking-tight leading-tight truncate transition-transform duration-200 group-hover:translate-x-1">
                   {post.title}
                 </h3>
                 {post.excerpt && (
@@ -93,7 +93,7 @@ export async function HomeDevlog({ locale }: { locale: string }) {
               </div>
 
               {/* Col 5 — Arrow */}
-              <MoveRight className="size-4 text-muted-foreground/25 group-hover:text-foreground group-hover:-rotate-45 transition-all duration-300 justify-self-end" />
+              <MoveRight className="size-4 text-muted-foreground/25 group-hover:text-foreground group-hover:translate-x-1 transition-all duration-300 justify-self-end" />
             </Link>
             <div className="w-full h-px bg-border" />
           </div>
@@ -106,7 +106,7 @@ export async function HomeDevlog({ locale }: { locale: string }) {
         className="sm:hidden inline-flex items-center gap-1.5 text-label-sm text-muted-foreground hover:text-foreground transition-colors duration-300 w-fit"
       >
         Ver todos os artigos
-        <MoveRight className="size-3.5 -rotate-45" />
+        <MoveRight className="size-3.5" />
       </Link>
     </section>
   );

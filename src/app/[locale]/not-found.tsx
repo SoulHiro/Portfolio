@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MoveLeft } from "lucide-react";
 import { MouseCoords } from "@/components/mouse-coords";
+import { Glitch404 } from "@/components/easter-eggs/glitch-404";
 
 export default function NotFound() {
   return (
@@ -9,12 +10,10 @@ export default function NotFound() {
 
         {/* 404 */}
         <div className="flex flex-col gap-3">
-          <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/30 uppercase">
+          <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/50 dark:text-muted-foreground/30 uppercase">
             Erro
           </span>
-          <h1 className="font-display italic text-display-year tracking-tight leading-none">
-            404
-          </h1>
+          <Glitch404 />
         </div>
 
         <div className="w-full h-px bg-border" />

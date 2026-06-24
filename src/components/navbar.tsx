@@ -7,6 +7,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Label, Small } from "@/components/ui/typography";
 import { LocaleSwitcher } from "@/components/locale-switcher";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Menu, X } from "lucide-react";
 
 /* ─── Live Clock ─── */
@@ -202,7 +203,11 @@ export function Navbar() {
         className={`fixed z-50 top-0 left-0 w-full transition-all duration-300 ${headerBg}`}
       >
         <div className="grid grid-cols-[1fr_auto_1fr] items-center px-4 py-4 lg:px-8 lg:py-8 max-w-7xl mx-auto">
-        <Link href="/" className="justify-self-start">
+        <Link
+          href="/"
+          className="justify-self-start"
+          onClick={() => window.dispatchEvent(new CustomEvent("logo-click"))}
+        >
           <Label className="font-korean text-body-md font-medium">민준</Label>
         </Link>
 
@@ -214,6 +219,7 @@ export function Navbar() {
         <div className="justify-self-end flex items-center gap-6">
           <div className="hidden lg:block"><LiveClock /></div>
           <LocaleSwitcher />
+          <ThemeSwitcher />
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden flex items-center justify-center size-10 text-foreground cursor-pointer"

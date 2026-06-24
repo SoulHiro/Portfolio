@@ -6,6 +6,9 @@ import { routing } from "@/i18n/routing";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { ConsoleEgg } from "@/components/easter-eggs/console-egg";
+import { LogoEgg } from "@/components/easter-eggs/logo-egg";
+import { KonamiEgg } from "@/components/easter-eggs/konami-egg";
 
 type Props = {
   children: React.ReactNode;
@@ -69,6 +72,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <NextIntlClientProvider>
       <NuqsAdapter>
+        <ConsoleEgg />
+        <LogoEgg />
+        <KonamiEgg />
         <Navbar />
         <main className="flex-1 w-full max-w-7xl mx-auto">{children}</main>
         <Footer />

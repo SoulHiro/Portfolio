@@ -52,7 +52,7 @@ export async function HomeLab() {
               Ao vivo
             </span>
             <span className="w-px h-3 bg-border" />
-            <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/30 uppercase">
+            <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/50 dark:text-muted-foreground/30 uppercase">
               Lab
             </span>
           </div>
@@ -75,7 +75,7 @@ export async function HomeLab() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
         {activePhase && (
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-label-xs tracking-[4px] text-muted-foreground/30 uppercase">
+            <span className="font-mono text-label-xs tracking-[4px] text-muted-foreground/50 dark:text-muted-foreground/30 uppercase">
               Fase atual
             </span>
             <p className="text-body-md font-medium">{activePhase.title}</p>
@@ -89,7 +89,7 @@ export async function HomeLab() {
 
         {labStatus && (
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-label-xs tracking-[4px] text-muted-foreground/30 uppercase">
+            <span className="font-mono text-label-xs tracking-[4px] text-muted-foreground/50 dark:text-muted-foreground/30 uppercase">
               Situação
             </span>
             <p className="text-body-sm text-muted-foreground leading-relaxed line-clamp-4">

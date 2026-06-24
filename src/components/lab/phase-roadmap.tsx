@@ -4,7 +4,7 @@ import type { SanityRoadmapStep } from "@/lib/sanity/types";
 
 const statusConfig = {
   done: { dot: "bg-foreground", line: "bg-foreground", label: "Completed" },
-  active: { dot: "bg-emerald-500", line: "bg-border", label: "In progress" },
+  active: { dot: "bg-emerald-600 dark:bg-emerald-500", line: "bg-border", label: "In progress" },
   upcoming: { dot: "bg-border", line: "bg-border", label: null },
 };
 
@@ -35,7 +35,7 @@ export function PhaseRoadmap({ label, steps }: PhaseRoadmapProps) {
                     className={cn(
                       "size-2 rounded-full shrink-0 ring-2 ring-background",
                       cfg.dot,
-                      step.status === "active" && "ring-emerald-500/30 ring-4",
+                      step.status === "active" && "ring-emerald-600/30 dark:ring-emerald-500/30 ring-4",
                     )}
                   />
                   {!isLast && (
@@ -46,7 +46,7 @@ export function PhaseRoadmap({ label, steps }: PhaseRoadmapProps) {
                 <div
                   className={cn(
                     "flex flex-col gap-1 pr-6",
-                    step.status === "upcoming" && "opacity-40",
+                    step.status === "upcoming" && "opacity-60 dark:opacity-40",
                   )}
                 >
                   <span className="text-label-xs text-muted-foreground/50 font-mono">
@@ -55,7 +55,7 @@ export function PhaseRoadmap({ label, steps }: PhaseRoadmapProps) {
                   <span
                     className={cn(
                       "text-body-sm font-medium",
-                      step.status === "active" && "text-emerald-500",
+                      step.status === "active" && "text-emerald-600 dark:text-emerald-500",
                     )}
                   >
                     {step.title}
@@ -84,7 +84,7 @@ export function PhaseRoadmap({ label, steps }: PhaseRoadmapProps) {
                   className={cn(
                     "size-2 rounded-full shrink-0 ring-2 ring-background mt-1",
                     cfg.dot,
-                    step.status === "active" && "ring-emerald-500/30 ring-4",
+                    step.status === "active" && "ring-emerald-600/30 dark:ring-emerald-500/30 ring-4",
                   )}
                 />
                 {!isLast && (
@@ -95,7 +95,7 @@ export function PhaseRoadmap({ label, steps }: PhaseRoadmapProps) {
               <div
                 className={cn(
                   "flex flex-col gap-1 pb-6",
-                  step.status === "upcoming" && "opacity-40",
+                  step.status === "upcoming" && "opacity-60 dark:opacity-40",
                 )}
               >
                 <span className="text-label-xs text-muted-foreground/50 font-mono">
@@ -104,7 +104,7 @@ export function PhaseRoadmap({ label, steps }: PhaseRoadmapProps) {
                 <span
                   className={cn(
                     "text-body-sm font-medium",
-                    step.status === "active" && "text-emerald-500",
+                    step.status === "active" && "text-emerald-600 dark:text-emerald-500",
                   )}
                 >
                   {step.title}
