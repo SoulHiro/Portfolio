@@ -168,6 +168,12 @@ const labProject = defineType({
     }),
     defineField({ name: "commitsCount", title: "Qtd. de commits", description: "Atualize manualmente quando quiser.", type: "number" }),
     defineField({
+      name: "youtubePlaylistId",
+      title: "ID da playlist do YouTube",
+      description: "Só o ID, ex: PLrAXtmErZgOeiKm4sgNOknc9TTnRtbHlX",
+      type: "string",
+    }),
+    defineField({
       name: "roadmap",
       title: "Roadmap (máx 6 fases)",
       type: "array",

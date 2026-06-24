@@ -62,12 +62,12 @@ export type SanityLabProject = {
   liveUrl: string | null;
   githubRepo: string | null;
   commitsCount: number | null;
+  youtubePlaylistId: string | null;
   roadmap: SanityRoadmapStep[] | null;
 };
 
 export type SanityLabSettings = {
   featuredProject: SanityLabProject | null;
-  youtubePlaylistId: string | null;
 };
 
 export type SanityLabStatus = {

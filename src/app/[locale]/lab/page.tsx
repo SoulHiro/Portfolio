@@ -49,9 +49,9 @@ export default async function LabPage({ params }: Props) {
       { next: { revalidate: 3600 } },
     ));
 
-  // Fetch YouTube episodes if playlist configured
-  const episodes = settings?.youtubePlaylistId
-    ? await fetchPlaylistEpisodes(settings.youtubePlaylistId)
+  // Fetch YouTube episodes via playlist ID stored on the project
+  const episodes = project?.youtubePlaylistId
+    ? await fetchPlaylistEpisodes(project.youtubePlaylistId)
     : [];
 
   const latestEpisode = episodes.length > 0 ? episodes[episodes.length - 1] : null;

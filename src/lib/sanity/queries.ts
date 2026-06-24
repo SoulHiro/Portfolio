@@ -95,6 +95,7 @@ const LAB_PROJECT_FIELDS = groq`
   liveUrl,
   githubRepo,
   commitsCount,
+  youtubePlaylistId,
   "roadmap": roadmap[] | order(phase asc) {
     phase, title, description, status
   }
@@ -102,9 +103,8 @@ const LAB_PROJECT_FIELDS = groq`
 
 // Busca via singleton de configurações (quando existe featuredProject selecionado)
 export const LAB_SETTINGS_QUERY = groq`
-  *[_type == "labSettings" && _id == "labSettings-singleton"][0] {
-    "featuredProject": featuredProject-> { ${LAB_PROJECT_FIELDS} },
-    youtubePlaylistId
+  *[_type == "labSettings"][0] {
+    "featuredProject": featuredProject-> { ${LAB_PROJECT_FIELDS} }
   }
 `;
 
@@ -116,7 +116,7 @@ export const LAB_PROJECT_FALLBACK_QUERY = groq`
 `;
 
 export const LAB_STATUS_QUERY = groq`
-  *[_type == "labStatus" && _id == "labStatus-singleton"][0] {
+  *[_type == "labStatus"][0] {
     body,
     "updatedAt": _updatedAt
   }
