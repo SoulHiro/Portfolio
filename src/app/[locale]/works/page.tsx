@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { H1, P, Label } from "@/components/ui/typography";
 import { client } from "@/lib/sanity/client";
-import { PROJECTS_QUERY, POSTS_QUERY } from "@/lib/sanity/queries";
-import type { SanityProjectListing, SanityPostListing } from "@/lib/sanity/types";
+import { POSTS_QUERY } from "@/lib/sanity/queries";
+import type { SanityPostListing } from "@/lib/sanity/types";
 import { WorksContent } from "@/components/works-content";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -72,35 +72,6 @@ const MOCK_POSTS: SanityPostListing[] = [
   },
 ];
 
-const MOCK_PROJECTS: (SanityProjectListing & { stack?: string[] })[] = [
-  {
-    _id: "p1",
-    title: "CampoMind",
-    slug: "campomind",
-    tagline: "Plataforma de saúde mental para o agronegócio via WhatsApp.",
-    category: "SaaS",
-    year: 2025,
-    stack: ["NEXT.JS", "TYPESCRIPT", "SANITY"],
-    heroImage: null as never,
-    color: null,
-    featured: true,
-    order: 1,
-  },
-  {
-    _id: "p2",
-    title: "Portfolio",
-    slug: "portfolio-pessoal",
-    tagline: "Este site. Minimalismo, i18n e deploy estático.",
-    category: "Website",
-    year: 2025,
-    stack: ["NEXT.JS", "TAILWIND", "VERCEL"],
-    heroImage: null as never,
-    color: null,
-    featured: null,
-    order: 2,
-  },
-];
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "WorksPage" });
@@ -113,23 +84,12 @@ export default async function WorksPage({ params }: Props) {
 
   const t = await getTranslations("WorksPage");
 
-  const [projectsFromSanity, postsFromSanity] = await Promise.all([
-    client.fetch<SanityProjectListing[]>(
-      PROJECTS_QUERY,
-      { locale },
-      { next: { revalidate: 3600 } },
-    ),
-    client.fetch<SanityPostListing[]>(
-      POSTS_QUERY,
-      { locale },
-      { next: { revalidate: 3600 } },
-    ),
-  ]);
+  const postsFromSanity = await client.fetch<SanityPostListing[]>(
+    POSTS_QUERY,
+    { locale },
+    { next: { revalidate: 3600 } },
+  );
 
-  const projects =
-    projectsFromSanity.length > 0
-      ? projectsFromSanity
-      : MOCK_PROJECTS;
   const posts = postsFromSanity.length > 0 ? postsFromSanity : MOCK_POSTS;
 
   return (
@@ -149,16 +109,11 @@ export default async function WorksPage({ params }: Props) {
         <P className="text-muted-foreground max-w-lg mt-6">{t("description")}</P>
       </div>
 
-      {/* Content — client component handles search/filter/grouping */}
       <Suspense>
         <WorksContent
-          projects={projects}
           posts={posts}
           labels={{
-            projectsLabel: t("projectsLabel"),
-            writingLabel: t("writingLabel"),
             readMin: t("readMin"),
-            noProjects: t("noProjects"),
             noPosts: t("noPosts"),
           }}
         />
