@@ -78,8 +78,36 @@ export const POSTS_QUERY = groq`
     title,
     "slug": slug.current,
     "excerpt": select($locale == "en" => coalesce(excerpt_en, excerpt), excerpt),
-    "category": categories[0]->title,
+    "category": coalesce(categories[0]->title, tags[0]),
     publishedAt,
     estimatedReadingTime
+  }
+`;
+
+// ─── Lab ──────────────────────────────────────────────────────────────────────
+
+export const LAB_SETTINGS_QUERY = groq`
+  *[_type == "labSettings" && _id == "labSettings-singleton"][0] {
+    "featuredProject": featuredProject-> {
+      _id,
+      name,
+      description,
+      architectureNotes,
+      technologies,
+      liveUrl,
+      githubRepo,
+      commitsCount,
+      "roadmap": roadmap[] | order(phase asc) {
+        phase, title, description, status
+      }
+    },
+    youtubePlaylistId
+  }
+`;
+
+export const LAB_STATUS_QUERY = groq`
+  *[_type == "labStatus" && _id == "labStatus-singleton"][0] {
+    body,
+    "updatedAt": _updatedAt
   }
 `;

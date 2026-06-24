@@ -44,6 +44,39 @@ export type SanityPostFull = {
   body: unknown[];
 };
 
+// ─── Lab ──────────────────────────────────────────────────────────────────────
+
+export type SanityRoadmapStep = {
+  phase: number;
+  title: string;
+  description: string | null;
+  status: "done" | "active" | "upcoming";
+};
+
+export type SanityLabProject = {
+  _id: string;
+  name: string;
+  description: string | null;
+  architectureNotes: string | null;
+  technologies: string[] | null;
+  liveUrl: string | null;
+  githubRepo: string | null;
+  commitsCount: number | null;
+  roadmap: SanityRoadmapStep[] | null;
+};
+
+export type SanityLabSettings = {
+  featuredProject: SanityLabProject | null;
+  youtubePlaylistId: string | null;
+};
+
+export type SanityLabStatus = {
+  body: string;
+  updatedAt: string;
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 export type SanityProjectFull = {
   _id: string;
   title: string;
