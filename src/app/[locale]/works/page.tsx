@@ -35,10 +35,8 @@ export default async function WorksPage({ params }: Props) {
     <section className="flex flex-col gap-16 py-24 px-6 md:px-12 lg:px-24">
       {/* Header */}
       <div>
-        <div className="w-full h-px bg-border" />
-        <div className="flex flex-col gap-4 mt-8">
+        <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-16 h-px bg-muted-foreground" />
             <Label size="sm" className="text-muted-foreground tracking-[4px]">
               {t("label")}
             </Label>
