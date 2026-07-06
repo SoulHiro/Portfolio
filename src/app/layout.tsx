@@ -83,7 +83,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getLocale();
+  let locale = "en";
+  try {
+    locale = await getLocale();
+  } catch {
+    // getLocale() fails outside the [locale] context (API routes, static files)
+  }
   const lang = locale === "pt-br" ? "pt-BR" : locale;
 
   return (
