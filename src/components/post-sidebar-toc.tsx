@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export type TocSection = { id: string; title: string };
+export type TocSection = { id: string; title: string; level: "h2" | "h3" };
 
 function useActiveSection(ids: string[]) {
   const [activeId, setActiveId] = useState<string | null>(ids[0] ?? null);
@@ -37,9 +37,10 @@ export function PostSidebarToc({ sections }: { sections: TocSection[] }) {
 
   return (
     <aside className="absolute right-0 top-0 h-full w-44 hidden xl:flex pointer-events-none">
-      <div className="sticky top-0 h-screen flex flex-col items-end justify-center w-full px-5 gap-6 pointer-events-auto">
+      <div className="sticky top-0 h-screen flex flex-col items-end justify-center w-full px-5 gap-4 pointer-events-auto">
         {sections.map((section) => {
           const isActive = activeId === section.id;
+          const isH3 = section.level === "h3";
           return (
             <a
               key={section.id}
@@ -50,13 +51,21 @@ export function PostSidebarToc({ sections }: { sections: TocSection[] }) {
                   : "text-muted-foreground/35 hover:text-muted-foreground"
               }`}
             >
-              <span className="text-label-xs leading-snug max-w-[90px]">
+              <span
+                className={`leading-snug max-w-[90px] transition-all duration-300 ${
+                  isH3
+                    ? "text-[10px] max-w-[78px] opacity-80"
+                    : "text-label-xs"
+                }`}
+              >
                 {section.title}
               </span>
               <div
-                className={`w-3 h-px flex-shrink-0 transition-all duration-300 ${
+                className={`h-px flex-shrink-0 transition-all duration-300 ${
+                  isH3 ? "w-2" : "w-3"
+                } ${
                   isActive
-                    ? "bg-foreground w-5"
+                    ? `bg-foreground ${isH3 ? "w-3" : "w-5"}`
                     : "bg-muted-foreground/30 group-hover:bg-muted-foreground/50"
                 }`}
               />

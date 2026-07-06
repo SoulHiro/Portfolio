@@ -45,9 +45,28 @@ const portableTextComponents: any = {
         </H2>
       );
     },
-    h3: ({ children }: { children: React.ReactNode }) => (
-      <H3 className="mt-6 md:mt-8 mb-3 md:mb-4 font-sans font-semibold text-h4">{children}</H3>
-    ),
+    h3: ({
+      children,
+      value,
+    }: {
+      children: React.ReactNode;
+      // biome-ignore lint/suspicious/noExplicitAny: portabletext value
+      value: any;
+    }) => {
+      const text = (value?.children ?? [])
+        // biome-ignore lint/suspicious/noExplicitAny: portabletext span
+        .map((c: any) => c.text ?? "")
+        .join("");
+      const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+      return (
+        <H3 id={id} className="mt-6 md:mt-8 mb-3 md:mb-4 font-sans font-semibold text-h4 scroll-mt-28">
+          {children}
+        </H3>
+      );
+    },
     normal: ({ children }: { children: React.ReactNode }) => (
       <P size="md" className="leading-[1.85] mb-5 text-foreground/90">
         {children}

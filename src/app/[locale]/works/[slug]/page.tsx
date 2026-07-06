@@ -70,21 +70,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-/* ─── Extract h2 sections from body for TOC ─── */
+/* ─── Extract h2/h3 sections from body for TOC ─── */
 function extractSections(body: unknown[]): TocSection[] {
   return body
     .filter((b) => {
       const block = b as { _type?: string; style?: string };
-      return block._type === "block" && block.style === "h2";
+      return block._type === "block" && (block.style === "h2" || block.style === "h3");
     })
     .map((b) => {
-      const block = b as { children?: { text?: string }[] };
+      const block = b as { style?: string; children?: { text?: string }[] };
       const title = (block.children ?? []).map((c) => c.text ?? "").join("");
       const id = title
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "");
-      return { id, title };
+      return { id, title, level: block.style as "h2" | "h3" };
     });
 }
 
