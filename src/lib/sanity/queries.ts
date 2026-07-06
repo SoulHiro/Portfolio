@@ -48,7 +48,7 @@ export const ALL_PROJECT_SLUGS_QUERY = groq`
 `;
 
 export const POST_BY_SLUG_QUERY = groq`
-  *[_type == "post" && slug.current == $slug][0] {
+  *[_type == "post" && !(_id in path("drafts.**")) && slug.current == $slug][0] {
     _id,
     title,
     "titleHighlight": coalesce(titleHighlight, null),
@@ -67,13 +67,13 @@ export const POST_BY_SLUG_QUERY = groq`
 `;
 
 export const ALL_POST_SLUGS_QUERY = groq`
-  *[_type == "post" && defined(slug.current)] {
+  *[_type == "post" && !(_id in path("drafts.**")) && defined(slug.current)] {
     "slug": slug.current
   }
 `;
 
 export const POSTS_QUERY = groq`
-  *[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+  *[_type == "post" && !(_id in path("drafts.**")) && defined(slug.current)] | order(publishedAt desc) {
     _id,
     title,
     "slug": slug.current,
@@ -116,7 +116,7 @@ export const LAB_PROJECT_FALLBACK_QUERY = groq`
 `;
 
 export const LATEST_POSTS_QUERY = groq`
-  *[_type == "post" && defined(slug.current)] | order(publishedAt desc) [0...3] {
+  *[_type == "post" && !(_id in path("drafts.**")) && defined(slug.current)] | order(publishedAt desc) [0...3] {
     _id,
     title,
     "slug": slug.current,
@@ -128,7 +128,7 @@ export const LATEST_POSTS_QUERY = groq`
 `;
 
 export const RELATED_POSTS_QUERY = groq`
-  *[_type == "post" && slug.current != $slug && defined(slug.current)] | order(publishedAt desc) [0...2] {
+  *[_type == "post" && !(_id in path("drafts.**")) && slug.current != $slug && defined(slug.current)] | order(publishedAt desc) [0...2] {
     _id,
     title,
     "slug": slug.current,
