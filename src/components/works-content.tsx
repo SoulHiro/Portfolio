@@ -19,23 +19,30 @@ type Props = {
 };
 
 /* ─── Date utils ─── */
+function parseUTC(iso: string) {
+  const d = new Date(iso);
+  return { y: d.getUTCFullYear(), m: d.getUTCMonth(), day: d.getUTCDate() };
+}
+
 function formatMonthYear(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  const { y, m } = parseUTC(iso);
+  return new Date(Date.UTC(y, m, 1)).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
 }
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric" });
+  const { y, m, day } = parseUTC(iso);
+  return new Date(Date.UTC(y, m, day)).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
 }
 
 function getYear(iso: string) {
-  return String(new Date(iso).getFullYear());
+  return String(parseUTC(iso).y);
 }
 
 function groupByMonth(posts: SanityPostListing[]) {
   const groups: Record<string, SanityPostListing[]> = {};
   for (const post of posts) {
-    const d = new Date(post.publishedAt);
-    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+    const { y, m } = parseUTC(post.publishedAt);
+    const key = `${y}-${String(m + 1).padStart(2, "0")}`;
     if (!groups[key]) groups[key] = [];
     groups[key].push(post);
   }

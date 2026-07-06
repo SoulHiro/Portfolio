@@ -5,10 +5,12 @@ import { LATEST_POSTS_QUERY } from "@/lib/sanity/queries";
 import type { SanityPostListing } from "@/lib/sanity/types";
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("pt-BR", {
+  const d = new Date(iso);
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())).toLocaleDateString("pt-BR", {
     day: "numeric",
     month: "long",
     year: "numeric",
+    timeZone: "UTC",
   });
 }
 
