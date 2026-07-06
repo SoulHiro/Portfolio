@@ -2,6 +2,7 @@
 
 import { PortableText } from "next-sanity";
 import { PostBlockquote } from "@/components/post-blockquote";
+import { PostCodeBlock } from "@/components/post-code-block";
 import { H2, H3, P } from "@/components/ui/typography";
 
 function SectionSeparator() {
@@ -16,6 +17,11 @@ function SectionSeparator() {
 
 // biome-ignore lint/suspicious/noExplicitAny: portabletext requires any for components map
 const portableTextComponents: any = {
+  types: {
+    code: ({ value }: { value: { code: string; language?: string; filename?: string } }) => (
+      <PostCodeBlock value={value} />
+    ),
+  },
   block: {
     h2: ({
       children,
