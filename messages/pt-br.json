@@ -15,6 +15,13 @@
     "description": "Construindo produtos digitais com visão sistêmica — do problema de negócio à interface, passando pela arquitetura e experiência.",
     "cta": "Entrar em contato"
   },
+  "HomeDevlog": {
+    "label": "DEVLOG",
+    "title": "O que estou",
+    "titleHighlight": "escrevendo",
+    "viewAll": "Ver todos",
+    "viewAllMobile": "Ver todos os artigos"
+  },
   "About": {
     "label": "QUEM EU SOU",
     "alt": "Victor M. Santos — Engenheiro de Software & Designer de Produto",

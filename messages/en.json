@@ -15,6 +15,13 @@
     "description": "Building digital products with systemic vision — from business problem to interface, through architecture and experience.",
     "cta": "Get in touch"
   },
+  "HomeDevlog": {
+    "label": "DEVLOG",
+    "title": "What I'm",
+    "titleHighlight": "writing",
+    "viewAll": "View all",
+    "viewAllMobile": "View all posts"
+  },
   "About": {
     "label": "WHO I AM",
     "alt": "Victor M. Santos — Software Engineer & Product Designer",

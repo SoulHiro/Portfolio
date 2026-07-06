@@ -1,12 +1,14 @@
 import { Link } from "@/i18n/navigation";
 import { MoveRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { client } from "@/lib/sanity/client";
 import { LATEST_POSTS_QUERY } from "@/lib/sanity/queries";
 import type { SanityPostListing } from "@/lib/sanity/types";
 
-function formatDate(iso: string) {
+function formatDate(iso: string, locale: string) {
   const d = new Date(iso);
-  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())).toLocaleDateString("pt-BR", {
+  const dateLocale = locale === "pt-br" ? "pt-BR" : "en-US";
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())).toLocaleDateString(dateLocale, {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -15,11 +17,14 @@ function formatDate(iso: string) {
 }
 
 export async function HomeDevlog({ locale }: { locale: string }) {
-  const posts = await client.fetch<SanityPostListing[]>(
-    LATEST_POSTS_QUERY,
-    { locale },
-    { next: { tags: ["post"] } },
-  );
+  const [posts, t] = await Promise.all([
+    client.fetch<SanityPostListing[]>(
+      LATEST_POSTS_QUERY,
+      { locale },
+      { next: { tags: ["post"] } },
+    ),
+    getTranslations("HomeDevlog"),
+  ]);
 
   if (!posts || posts.length === 0) return null;
 
@@ -29,18 +34,18 @@ export async function HomeDevlog({ locale }: { locale: string }) {
       <div className="flex items-end justify-between gap-6">
         <div className="flex flex-col gap-3">
           <span className="font-mono text-label-xs tracking-[5px] text-muted-foreground/50 dark:text-muted-foreground/30 uppercase">
-            Devlog
+            {t("label")}
           </span>
           <h2 className="font-display text-display-md tracking-tight leading-tight">
-            O que estou{" "}
-            <span className="italic text-muted-foreground">escrevendo</span>
+            {t("title")}{" "}
+            <span className="italic text-muted-foreground">{t("titleHighlight")}</span>
           </h2>
         </div>
         <Link
           href="/works"
           className="hidden sm:inline-flex items-center gap-1.5 text-label-sm text-muted-foreground hover:text-foreground transition-colors duration-300 shrink-0 mt-1"
         >
-          Ver todos
+          {t("viewAll")}
           <MoveRight className="size-3.5" />
         </Link>
       </div>
@@ -82,7 +87,7 @@ export async function HomeDevlog({ locale }: { locale: string }) {
               {/* Col 4 — Date + time (desktop only) */}
               <div className="hidden md:flex items-center gap-2 whitespace-nowrap">
                 <span className="font-mono text-label-xs text-muted-foreground/40">
-                  {formatDate(post.publishedAt)}
+                  {formatDate(post.publishedAt, locale)}
                 </span>
                 {post.estimatedReadingTime && (
                   <>
@@ -107,7 +112,7 @@ export async function HomeDevlog({ locale }: { locale: string }) {
         href="/works"
         className="sm:hidden inline-flex items-center gap-1.5 text-label-sm text-muted-foreground hover:text-foreground transition-colors duration-300 w-fit"
       >
-        Ver todos os artigos
+        {t("viewAllMobile")}
         <MoveRight className="size-3.5" />
       </Link>
     </section>
