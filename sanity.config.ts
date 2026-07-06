@@ -143,6 +143,21 @@ const labProject = defineType({
   type: "document",
   fields: [
     defineField({ name: "name", title: "Nome do projeto", type: "string", validation: (r) => r.required() }),
+    defineField({
+      name: "projectType",
+      title: "Tipo de projeto",
+      type: "string",
+      description: "YouTube: mostra seção de episódios. Pessoal: oculta episódios.",
+      options: {
+        list: [
+          { title: "📺 YouTube — documentado em vídeo", value: "youtube" },
+          { title: "🔒 Pessoal — sem episódios", value: "personal" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "youtube",
+      validation: (r) => r.required(),
+    }),
     defineField({ name: "description", title: "Descrição curta", description: "Aparece abaixo do título na hero do Lab.", type: "text", rows: 3 }),
     defineField({
       name: "architectureNotes",

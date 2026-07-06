@@ -56,6 +56,7 @@ export type SanityRoadmapStep = {
 export type SanityLabProject = {
   _id: string;
   name: string;
+  projectType: "youtube" | "personal" | null;
   description: string | null;
   architectureNotes: string | null;
   technologies: string[] | null;

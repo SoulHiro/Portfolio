@@ -1,4 +1,5 @@
 import { GitCommitHorizontal } from "lucide-react";
+import { IconBrandGithub } from "@tabler/icons-react";
 import type { SanityLabProject } from "@/lib/sanity/types";
 
 type LastCommit = { message: string; relativeTime: string } | null;
@@ -52,6 +53,18 @@ export async function ProjectHero({ project }: ProjectHeroProps) {
         <p className="font-mono text-label-xs text-muted-foreground/35 leading-loose">
           {tech.join("  ·  ")}
         </p>
+      )}
+
+      {project.githubRepo && (
+        <a
+          href={`https://github.com/${project.githubRepo}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-2.5 border border-border px-4 py-2 text-label-sm text-muted-foreground hover:text-foreground hover:border-foreground transition-colors duration-300 w-fit"
+        >
+          <IconBrandGithub className="size-4" />
+          {project.githubRepo}
+        </a>
       )}
 
       {lastCommit && (

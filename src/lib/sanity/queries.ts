@@ -89,6 +89,7 @@ export const POSTS_QUERY = groq`
 const LAB_PROJECT_FIELDS = groq`
   _id,
   name,
+  projectType,
   description,
   architectureNotes,
   technologies,

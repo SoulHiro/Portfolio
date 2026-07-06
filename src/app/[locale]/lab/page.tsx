@@ -83,12 +83,14 @@ export default async function LabPage({ params }: Props) {
       { next: { tags: ["lab"] } },
     ));
 
-  // Fetch YouTube episodes via playlist ID stored on the project
-  const episodes = project?.youtubePlaylistId
+  const isYouTube = project?.projectType !== "personal";
+
+  // Fetch YouTube episodes only for YouTube projects
+  const episodes = isYouTube && project?.youtubePlaylistId
     ? await fetchPlaylistEpisodes(project.youtubePlaylistId)
     : [];
 
-  const latestEpisode = episodes.length > 0 ? episodes[episodes.length - 1] : null;
+  const latestEpisode = isYouTube && episodes.length > 0 ? episodes[episodes.length - 1] : null;
   const roadmapSteps = project?.roadmap ?? [];
 
   return (
@@ -101,16 +103,20 @@ export default async function LabPage({ params }: Props) {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div className="flex flex-col gap-4 flex-1">
             <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1.5">
-                <span className="relative flex size-1.5">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75 animate-ping" />
-                  <span className="relative inline-flex size-1.5 rounded-full bg-red-500" />
-                </span>
-                <span className="text-label-xs text-red-500 tracking-[3px] font-semibold animate-pulse">
-                  REC
-                </span>
-              </span>
-              <span className="w-px h-3 bg-border" />
+              {isYouTube && (
+                <>
+                  <span className="flex items-center gap-1.5">
+                    <span className="relative flex size-1.5">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75 animate-ping" />
+                      <span className="relative inline-flex size-1.5 rounded-full bg-red-500" />
+                    </span>
+                    <span className="text-label-xs text-red-500 tracking-[3px] font-semibold animate-pulse">
+                      REC
+                    </span>
+                  </span>
+                  <span className="w-px h-3 bg-border" />
+                </>
+              )}
               <Label size="sm" className="text-muted-foreground tracking-[4px]">
                 {t("label")}
               </Label>
@@ -139,8 +145,8 @@ export default async function LabPage({ params }: Props) {
         <BuildStatus body={labStatus.body} updatedAt={labStatus.updatedAt} />
       )}
 
-      {/* 4 — Episódios */}
-      <EpisodeList label={t("episodesTitle")} episodes={episodes} />
+      {/* 4 — Episódios (apenas projetos YouTube) */}
+      {isYouTube && <EpisodeList label={t("episodesTitle")} episodes={episodes} />}
 
       {/* 5 — Arquitetura */}
       {project && <ProjectHero project={project} />}
