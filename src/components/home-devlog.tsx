@@ -29,7 +29,7 @@ export async function HomeDevlog({ locale }: { locale: string }) {
   if (!posts || posts.length === 0) return null;
 
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-24 flex flex-col gap-10">
+    <section className="py-24 flex flex-col gap-10">
       {/* Header */}
       <div className="flex items-end justify-between gap-6">
         <div className="flex flex-col gap-3">

@@ -76,6 +76,15 @@ export type SanityLabStatus = {
   updatedAt: string;
 };
 
+export type SanityLabProjectListing = {
+  _id: string;
+  name: string;
+  description: string | null;
+  technologies: string[] | null;
+  liveUrl: string | null;
+  githubRepo: string | null;
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type SanityProjectFull = {

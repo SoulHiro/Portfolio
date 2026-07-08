@@ -85,7 +85,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <LogoEgg />
         <KonamiEgg />
         <Navbar />
-        <main className="flex-1 w-full max-w-7xl mx-auto">{children}</main>
+        <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8">{children}</main>
         <Footer />
       </NuqsAdapter>
       <Analytics />

@@ -146,3 +146,25 @@ export const LAB_STATUS_QUERY = groq`
     "updatedAt": _updatedAt
   }
 `;
+
+export const HOME_PROJECTS_QUERY = groq`
+  *[_type == "labProject"] | order(_createdAt desc) [0...4] {
+    _id,
+    name,
+    description,
+    technologies,
+    liveUrl,
+    githubRepo
+  }
+`;
+
+export const LAB_PROJECTS_LIST_QUERY = groq`
+  *[_type == "labProject" && _id != $featuredId] | order(_createdAt desc) {
+    _id,
+    name,
+    description,
+    technologies,
+    liveUrl,
+    githubRepo
+  }
+`;

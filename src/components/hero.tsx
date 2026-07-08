@@ -15,7 +15,7 @@ export function Hero() {
   return (
     <motion.section
       id="hero-section"
-      className="relative flex flex-col w-full h-screen overflow-hidden px-6 md:px-12 lg:px-24"
+      className="relative flex flex-col w-full h-screen overflow-hidden"
       style={{ opacity: sectionOpacity }}
     >
       {/* Background lines */}

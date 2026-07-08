@@ -71,7 +71,7 @@ export async function TechStack() {
   ];
 
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-24">
+    <section className="py-24">
       <div className="w-full h-px bg-border mb-8" />
 
       <div className="flex flex-col gap-4 mb-8 md:mb-12">

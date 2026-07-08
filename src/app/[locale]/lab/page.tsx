@@ -6,7 +6,6 @@ import { PhaseRoadmap } from "@/components/lab/phase-roadmap";
 import { BuildStatus } from "@/components/lab/build-status";
 import { LabMetrics } from "@/components/lab/lab-metrics";
 import { EpisodeList } from "@/components/lab/episode-list";
-import { PastProjects } from "@/components/lab/past-projects";
 import { LatestEpisodePeek } from "@/components/lab/latest-episode-peek";
 import { client } from "@/lib/sanity/client";
 import { LAB_SETTINGS_QUERY, LAB_PROJECT_FALLBACK_QUERY, LAB_STATUS_QUERY } from "@/lib/sanity/queries";
@@ -74,9 +73,11 @@ export default async function LabPage({ params }: Props) {
     ),
   ]);
 
-  // Se não há labSettings configurado, usa o primeiro projeto cadastrado
+  // Projeto em destaque — só quando explicitamente configurado no Studio
+  const explicitFeatured = settings?.featuredProject ?? null;
+
   const project: SanityLabProject | null =
-    settings?.featuredProject ??
+    explicitFeatured ??
     (await client.fetch<SanityLabProject | null>(
       LAB_PROJECT_FALLBACK_QUERY,
       {},
@@ -94,7 +95,7 @@ export default async function LabPage({ params }: Props) {
   const roadmapSteps = project?.roadmap ?? [];
 
   return (
-    <section className="flex flex-col gap-20 py-24 px-6 md:px-12 lg:px-24">
+    <section className="flex flex-col gap-20 py-24">
 
       {/* 1 — Header: título + episódio mais recente */}
       <div className="flex flex-col gap-8">
@@ -157,9 +158,6 @@ export default async function LabPage({ params }: Props) {
         commitsCount={project?.commitsCount ?? null}
         episodesCount={episodes.length}
       />
-
-      {/* 7 — Histórico */}
-      <PastProjects label={t("archiveTitle")} />
 
     </section>
   );

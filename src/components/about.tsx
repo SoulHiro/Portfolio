@@ -11,7 +11,7 @@ export async function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative flex flex-col w-full justify-center py-16 md:min-h-screen md:py-0 px-6 md:px-12 lg:px-24"
+      className="relative flex flex-col w-full justify-center py-16 md:min-h-screen md:py-0"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
         <div className="min-w-0 flex justify-center md:block">

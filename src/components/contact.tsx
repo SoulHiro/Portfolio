@@ -1,9 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { H2, P } from "@/components/ui/typography";
-import { MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
 
-const WHATSAPP_NUMBER = "5511914720379";
+const EMAIL = "victormts.s1@gmail.com";
 
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/victormts/" },
@@ -14,12 +13,11 @@ const socials = [
 
 export async function Contact() {
   const t = await getTranslations("Contact");
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("whatsappMessage"))}`;
 
   return (
     <section
       id="contact"
-      className="flex items-center justify-center min-h-screen py-24 md:py-32 px-6 md:px-12 lg:px-24"
+      className="flex items-center justify-center min-h-screen py-24 md:py-32"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full">
         {/* Left — info */}
@@ -34,15 +32,10 @@ export async function Contact() {
             {t("description")}
           </P>
           <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/wa flex items-center gap-3 w-fit border border-border px-5 py-3 transition-colors duration-300 hover:border-foreground"
+            href={`mailto:${EMAIL}`}
+            className="text-body-md text-muted-foreground hover:text-foreground transition-colors duration-300 w-fit"
           >
-            <MessageCircle className="size-5 text-muted-foreground transition-colors duration-300 group-hover/wa:text-foreground" />
-            <P size="md" className="text-muted-foreground font-medium transition-colors duration-300 group-hover/wa:text-foreground">
-              {t("whatsappCta")}
-            </P>
+            {EMAIL}
           </a>
           <div className="flex flex-wrap gap-4 md:gap-8">
             {socials.map((social) => (

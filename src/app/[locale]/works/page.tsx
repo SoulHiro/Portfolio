@@ -83,7 +83,7 @@ export default async function WorksPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogLd) }}
       />
-    <section className="flex flex-col gap-16 py-24 px-6 md:px-12 lg:px-24">
+    <section className="flex flex-col gap-16 py-24">
       {/* Header */}
       <div>
         <div className="flex flex-col gap-4">

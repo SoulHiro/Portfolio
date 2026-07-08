@@ -161,7 +161,7 @@ export default async function PostPage({ params }: Props) {
 
       <article className="min-h-screen pb-24">
         {/* Back link */}
-        <div className="px-6 md:px-12 lg:px-24 pt-24 md:pt-32 pb-8 md:pb-12">
+        <div className="pt-24 md:pt-32 pb-8 md:pb-12">
           <Link
             href="/works"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-300 text-label-sm"
@@ -172,7 +172,7 @@ export default async function PostPage({ params }: Props) {
         </div>
 
         {/* Hero */}
-        <header className="px-6 md:px-12 lg:px-24 pb-12 md:pb-16 flex flex-col gap-5 md:gap-8 max-w-4xl">
+        <header className="pb-12 md:pb-16 flex flex-col gap-5 md:gap-8 max-w-4xl">
           {/* Category + read time */}
           <div className="flex items-center gap-4">
             {post.category && (
@@ -216,7 +216,7 @@ export default async function PostPage({ params }: Props) {
           <PostSidebarShare />
           <PostSidebarToc sections={sections} />
 
-          <div className="py-16 px-6 md:px-12 lg:px-24 xl:px-0 xl:max-w-2xl xl:mx-auto">
+          <div className="py-16 xl:max-w-2xl xl:mx-auto">
             <PostBody body={post.body} />
 
             {/* Tags */}
