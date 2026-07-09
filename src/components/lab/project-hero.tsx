@@ -1,4 +1,4 @@
-import { GitCommitHorizontal } from "lucide-react";
+import { GitCommitHorizontal, ExternalLink } from "lucide-react";
 import { IconBrandGithub } from "@tabler/icons-react";
 import type { SanityLabProject } from "@/lib/sanity/types";
 
@@ -55,17 +55,30 @@ export async function ProjectHero({ project }: ProjectHeroProps) {
         </p>
       )}
 
-      {project.githubRepo && (
-        <a
-          href={`https://github.com/${project.githubRepo}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-2.5 border border-border px-4 py-2 text-label-sm text-muted-foreground hover:text-foreground hover:border-foreground transition-colors duration-300 w-fit"
-        >
-          <IconBrandGithub className="size-4" />
-          {project.githubRepo}
-        </a>
-      )}
+      <div className="flex flex-wrap gap-3">
+        {project.githubRepo && (
+          <a
+            href={`https://github.com/${project.githubRepo}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2.5 border border-border px-4 py-2 text-label-sm text-muted-foreground hover:text-foreground hover:border-foreground transition-colors duration-300 w-fit"
+          >
+            <IconBrandGithub className="size-4" />
+            {project.githubRepo}
+          </a>
+        )}
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2.5 border border-border px-4 py-2 text-label-sm text-muted-foreground hover:text-foreground hover:border-foreground transition-colors duration-300 w-fit"
+          >
+            <ExternalLink className="size-4" />
+            Ver site
+          </a>
+        )}
+      </div>
 
       {lastCommit && (
         <div className="flex items-center gap-2 pt-2 border-t border-border/40">
