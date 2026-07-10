@@ -1,95 +1,106 @@
+import Image from "next/image";
 import { ArrowUpRight, GitBranch } from "lucide-react";
-import { client } from "@/lib/sanity/client";
-import { HOME_PROJECTS_QUERY } from "@/lib/sanity/queries";
-import type { SanityLabProjectListing } from "@/lib/sanity/types";
 
-const MOCK_PROJECTS: SanityLabProjectListing[] = [
+type Project = {
+  name: string;
+  description: string;
+  technologies: string[];
+  liveUrl: string | null;
+  githubRepo: string | null;
+  image: string;
+  imageAlt: string;
+  wip?: boolean;
+};
+
+const PROJECTS: Project[] = [
   {
-    _id: "mock-1",
-    name: "CampoMind",
-    description: "SaaS de saúde mental no agro via WhatsApp. PGR automatizado conforme NR-1.",
-    technologies: ["Next.js", "NestJS", "TypeScript", "WhatsApp API", "PostgreSQL"],
-    liveUrl: "https://campomind.com.br",
-    githubRepo: null,
+    name: "Âmbar Ecommerce",
+    description:
+      "Ecommerce de moda para classes A/B. Autenticação, catálogo com variantes, checkout e painel administrativo.",
+    technologies: ["Next.js", "TypeScript", "Drizzle ORM", "PostgreSQL"],
+    liveUrl: "https://ambar-ecommerce.vercel.app/",
+    githubRepo: "SoulHiro/AmbarCommerce",
+    image: "/images/ambar-banner.webp",
+    imageAlt:
+      "Casal em casacos de outono em parque com névoa — campanha editorial Âmbar",
+    wip: true,
   },
   {
-    _id: "mock-2",
-    name: "Nuvio",
-    description: "Plataforma financeira para autônomos e MEIs. Gestão de contratos e cobranças.",
-    technologies: ["React", "NestJS", "PostgreSQL", "Stripe"],
-    liveUrl: "https://nuvio.com.br",
-    githubRepo: "SoulHiro/nuvio",
-  },
-  {
-    _id: "mock-3",
-    name: "Linha de Comando",
-    description: "Estudo prático de terminal, shell script e acesso remoto via SSH.",
-    technologies: ["Bash", "Linux", "SSH", "zsh"],
-    liveUrl: null,
-    githubRepo: "SoulHiro/terminal-studies",
-  },
-  {
-    _id: "mock-4",
     name: "Portfolio",
-    description: "Este site. Next.js 15, Sanity CMS, i18n, ISR.",
+    description:
+      "Este site. Next.js App Router, Sanity CMS, i18n, ISR e design system próprio.",
     technologies: ["Next.js", "Sanity", "TypeScript", "Tailwind"],
     liveUrl: "https://victormts.dev",
     githubRepo: "SoulHiro/portfolio",
+    image: "/banner.webp",
+    imageAlt: "SoulHiro Studio — identidade visual do portfólio",
   },
 ];
 
 function ProjectCard({
   project,
   className = "",
+  priority = false,
+  imageSize = "(max-width: 1024px) 100vw, 50vw",
 }: {
-  project: SanityLabProjectListing;
+  project: Project;
   className?: string;
+  priority?: boolean;
+  imageSize?: string;
 }) {
-  const liveUrl = project.liveUrl;
   const githubUrl = project.githubRepo
     ? `https://github.com/${project.githubRepo}`
     : null;
-  const techs = project.technologies ?? [];
 
   return (
-    <div
-      className={`group flex flex-col gap-5 border border-border p-6 md:p-8 bg-background hover:bg-muted/30 transition-colors duration-300 ${className}`}
-    >
-      {/* Name + description */}
-      <div className="flex flex-col gap-2 flex-1">
-        <h3 className="font-display text-h3 tracking-tight leading-tight">
-          {project.name}
-        </h3>
-        {project.description && (
-          <p className="text-body-sm text-muted-foreground leading-relaxed">
-            {project.description}
-          </p>
-        )}
-      </div>
+    <div className={`group relative overflow-hidden ${className}`}>
+      <Image
+        src={project.image}
+        alt={project.imageAlt}
+        fill
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        priority={priority}
+        sizes={imageSize}
+      />
 
-      {/* Tech tags */}
-      {techs.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
-          {techs.slice(0, 4).map((t) => (
-            <span
-              key={t}
-              className="text-label-xs text-muted-foreground/60 border border-border px-2.5 py-0.5 rounded-full"
-            >
-              {t}
-            </span>
-          ))}
+      {/* gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5" />
+
+      {/* top-right badges */}
+      {project.wip && (
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-black/50 backdrop-blur-sm px-2.5 py-1 border border-white/15">
+          <span className="relative flex size-1.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-amber-400" />
+          </span>
+          <span className="font-mono text-label-xs text-white/70 tracking-widest uppercase">
+            Em construção
+          </span>
         </div>
       )}
 
-      {/* CTAs */}
-      {(liveUrl || githubUrl) && (
-        <div className="flex items-center gap-2 pt-1 mt-auto">
-          {liveUrl && (
+      {/* content */}
+      <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 flex flex-col gap-3">
+        <div>
+          <h3 className="font-display text-h3 text-white leading-tight">
+            <em>{project.name}</em>
+          </h3>
+          <p className="text-body-sm text-white/65 leading-relaxed mt-1.5 max-w-sm">
+            {project.description}
+          </p>
+        </div>
+
+        <p className="font-mono text-label-xs text-white/35 tracking-wide">
+          {project.technologies.join("  ·  ")}
+        </p>
+
+        <div className="flex items-center gap-2.5 pt-0.5">
+          {project.liveUrl && (
             <a
-              href={liveUrl}
+              href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-label-sm font-medium text-foreground border border-foreground px-3.5 py-1.5 hover:bg-foreground hover:text-background transition-colors duration-300"
+              className="inline-flex items-center gap-1.5 text-label-sm font-medium text-white border border-white/30 px-3.5 py-1.5 hover:bg-white hover:text-black transition-colors duration-300"
             >
               Ver projeto
               <ArrowUpRight className="size-3.5" />
@@ -100,37 +111,21 @@ function ProjectCard({
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-label-sm text-muted-foreground border border-border px-3.5 py-1.5 hover:border-foreground hover:text-foreground transition-colors duration-300"
+              className="inline-flex items-center gap-1.5 text-label-sm text-white/50 border border-white/20 px-3.5 py-1.5 hover:text-white hover:border-white/40 transition-colors duration-300"
             >
               <GitBranch className="size-3.5" />
               GitHub
             </a>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
 
-export async function HomeProjects() {
-  let projects = await client.fetch<SanityLabProjectListing[]>(
-    HOME_PROJECTS_QUERY,
-    {},
-    { next: { tags: ["lab"] } },
-  );
-
-  if (!projects || projects.length < 4) {
-    const real = projects ?? [];
-    const usedIds = new Set(real.map((p) => p._id));
-    const filler = MOCK_PROJECTS.filter((m) => !usedIds.has(m._id));
-    projects = [...real, ...filler].slice(0, 4);
-  }
-
-  const [p1, p2, p3, p4] = projects;
-
+export function HomeProjects() {
   return (
     <section className="py-24">
-      {/* Header */}
       <div className="flex flex-col gap-3 mb-10">
         <div className="w-full h-px bg-border" />
         <h2 className="font-display text-display-md tracking-tight leading-tight pt-6">
@@ -139,33 +134,18 @@ export async function HomeProjects() {
         </h2>
       </div>
 
-      {/* Bento grid — mobile: 1 col / desktop: assimétrico 3 cols */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-        {/* Card 1 — wide (col-span-2), taller */}
-        {p1 && (
-          <ProjectCard
-            project={p1}
-            className="lg:col-span-2 lg:row-span-2 lg:min-h-[320px]"
-          />
-        )}
-
-        {/* Card 2 — tall right */}
-        {p2 && (
-          <ProjectCard
-            project={p2}
-            className="lg:col-start-3 lg:row-span-2 lg:min-h-[320px]"
-          />
-        )}
-
-        {/* Card 3 — small bottom-left */}
-        {p3 && (
-          <ProjectCard project={p3} />
-        )}
-
-        {/* Card 4 — wide bottom */}
-        {p4 && (
-          <ProjectCard project={p4} className="lg:col-span-2" />
-        )}
+        <ProjectCard
+          project={PROJECTS[0]}
+          className="aspect-[16/10] lg:aspect-auto lg:col-span-2 lg:h-[540px]"
+          priority
+          imageSize="(max-width: 1024px) 100vw, 66vw"
+        />
+        <ProjectCard
+          project={PROJECTS[1]}
+          className="aspect-[4/3] lg:aspect-auto lg:h-[540px]"
+          imageSize="(max-width: 1024px) 100vw, 33vw"
+        />
       </div>
     </section>
   );
