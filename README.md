@@ -6,7 +6,6 @@ Personal portfolio and technical showcase built with Next.js 16 App Router, Sani
 
 [![Live Site](https://img.shields.io/badge/victormts.dev-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://victormts.dev)
 [![Last Commit](https://img.shields.io/github/last-commit/SoulHiro/portfolio?style=for-the-badge&color=111111&labelColor=111111&logo=github&logoColor=white)](https://github.com/SoulHiro/portfolio/commits/main)
-[![License](https://img.shields.io/badge/MIT-111111?style=for-the-badge)](LICENSE)
 
 [![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)
@@ -166,12 +165,10 @@ On every document publish, Sanity triggers a webhook to `POST /api/revalidate?se
 
 No `vercel.json` required. Vercel auto-detects Next.js and builds with zero configuration.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/SoulHiro/portfolio)
-
 After deploying, add all environment variables in the Vercel dashboard under **Settings > Environment Variables**, then configure the Sanity webhook to point at `https://your-domain/api/revalidate`.
 
 ---
 
-## License
-
-[MIT](LICENSE) — Victor M. Santos, 2026
+<div align="center">
+<sub>© 2026 Victor M. Santos — All rights reserved. This repository is public for viewing purposes only. Cloning, forking, or reusing the code without explicit permission is not allowed.</sub>
+</div>
