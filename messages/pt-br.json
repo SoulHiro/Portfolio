@@ -81,6 +81,20 @@
     "phase4Title": "Enterprise",
     "phase4Desc": "Contratos customizados, SLA, infraestrutura dedicada"
   },
+  "HomeProjects": {
+    "title": "Projetos",
+    "titleHighlight": "selecionados",
+    "wip": "Em construção",
+    "viewProject": "Ver projeto",
+    "ambar": {
+      "description": "Ecommerce de moda para classes A/B. Autenticação, catálogo com variantes, checkout e painel administrativo.",
+      "imageAlt": "Casal em casacos de outono em parque com névoa — campanha editorial Âmbar"
+    },
+    "portfolio": {
+      "description": "Este site. Next.js App Router, Sanity CMS, i18n, ISR e design system próprio.",
+      "imageAlt": "SoulHiro Studio — identidade visual do portfólio"
+    }
+  },
   "Contact": {
     "title1": "Vamos construir",
     "titleHighlight": "algo",
