@@ -129,14 +129,6 @@ On every document publish, Sanity triggers a webhook to `POST /api/revalidate?se
 
 ---
 
-## Deploy
-
-No `vercel.json` required. Vercel auto-detects Next.js and builds with zero configuration.
-
-After deploying, add all environment variables in the Vercel dashboard under **Settings > Environment Variables**, then configure the Sanity webhook to point at `https://your-domain/api/revalidate`.
-
----
-
 <div align="center">
 <sub>© 2026 Victor M. Santos — All rights reserved. This repository is public for viewing purposes only. Cloning, forking, or reusing the code without explicit permission is not allowed.</sub>
 </div>
