@@ -96,38 +96,6 @@ src/
 
 ---
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 20+
-- pnpm (`npm install -g pnpm`)
-- A [Sanity](https://sanity.io) project
-- A [Resend](https://resend.com) account
-- A [YouTube Data API v3](https://console.cloud.google.com) key
-
-### Installation
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/SoulHiro/portfolio.git
-cd portfolio
-
-# 2. Install dependencies
-pnpm install
-
-# 3. Configure environment variables
-cp .env.example .env.local
-# Edit .env.local with your values — see the table below
-
-# 4. Start the development server
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the site.
-The Sanity Studio is available at [http://localhost:3000/z-admin/studio](http://localhost:3000/z-admin/studio).
-
----
 
 ## Environment Variables
 
