@@ -178,7 +178,7 @@ export function Experience() {
               {/* Right cell */}
               <div
                 data-cell="right"
-                className={`pl-8 flex ${yearLeft ? "justify-start" : "justify-end items-start pt-1.5"}`}
+                className={`pl-8 flex ${yearLeft ? "justify-start" : "justify-start items-start pt-1.5"}`}
               >
                 {yearLeft ? (
                   <div
