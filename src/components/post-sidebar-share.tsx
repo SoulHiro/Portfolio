@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Check } from "lucide-react";
 import {
-  IconBrandX,
   IconBrandLinkedin,
-  IconLink,
   IconBrandOpenai,
+  IconBrandX,
+  IconLink,
 } from "@tabler/icons-react";
+import { Check } from "lucide-react";
+import { useState } from "react";
 
 export function PostSidebarShare() {
   const [copied, setCopied] = useState(false);

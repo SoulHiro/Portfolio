@@ -16,7 +16,10 @@ type PlaylistItemSnippet = {
 };
 
 type PlaylistItemsResponse = {
-  items?: Array<{ snippet: PlaylistItemSnippet; contentDetails?: { videoId: string } }>;
+  items?: Array<{
+    snippet: PlaylistItemSnippet;
+    contentDetails?: { videoId: string };
+  }>;
   nextPageToken?: string;
 };
 
@@ -30,11 +33,14 @@ function parseDuration(iso: string): string {
   const h = Number(match[1] ?? 0);
   const m = Number(match[2] ?? 0);
   const s = Number(match[3] ?? 0);
-  if (h > 0) return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  if (h > 0)
+    return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-export async function fetchPlaylistEpisodes(playlistId: string): Promise<YoutubeEpisode[]> {
+export async function fetchPlaylistEpisodes(
+  playlistId: string,
+): Promise<YoutubeEpisode[]> {
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) return [];
 
@@ -43,7 +49,9 @@ export async function fetchPlaylistEpisodes(playlistId: string): Promise<Youtube
     let pageToken: string | undefined;
 
     do {
-      const url = new URL("https://www.googleapis.com/youtube/v3/playlistItems");
+      const url = new URL(
+        "https://www.googleapis.com/youtube/v3/playlistItems",
+      );
       url.searchParams.set("part", "snippet");
       url.searchParams.set("playlistId", playlistId);
       url.searchParams.set("maxResults", "50");
@@ -71,7 +79,9 @@ export async function fetchPlaylistEpisodes(playlistId: string): Promise<Youtube
       dUrl.searchParams.set("id", batch);
       dUrl.searchParams.set("key", apiKey);
 
-      const dRes = await fetch(dUrl.toString(), { next: { revalidate: 86400 } });
+      const dRes = await fetch(dUrl.toString(), {
+        next: { revalidate: 86400 },
+      });
       if (dRes.ok) {
         const dData: VideoDetailsResponse = await dRes.json();
         for (const v of dData.items ?? []) {

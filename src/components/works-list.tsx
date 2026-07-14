@@ -1,10 +1,14 @@
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { H2, H3, P } from "@/components/ui/typography";
 import { MoveRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { H2, H3, P } from "@/components/ui/typography";
+import { Link } from "@/i18n/navigation";
 import type { SanityProjectListing } from "@/lib/sanity/types";
 
-export async function WorksList({ projects }: { projects: SanityProjectListing[] }) {
+export async function WorksList({
+  projects,
+}: {
+  projects: SanityProjectListing[];
+}) {
   const t = await getTranslations("Works");
 
   if (projects.length === 0) return null;
@@ -17,7 +21,9 @@ export async function WorksList({ projects }: { projects: SanityProjectListing[]
       <div className="w-full flex items-end justify-between">
         <H2>
           {t("title")}{" "}
-          <span className="text-muted-foreground italic">{t("titleHighlight")}</span>
+          <span className="text-muted-foreground italic">
+            {t("titleHighlight")}
+          </span>
         </H2>
         <P size="md" className="text-muted-foreground">
           {String(projects.length).padStart(2, "0")} {t("projects")}
@@ -34,7 +40,10 @@ export async function WorksList({ projects }: { projects: SanityProjectListing[]
               className="group flex flex-col sm:flex-row items-start sm:items-center p-6 md:p-12 justify-between gap-4 sm:gap-0 cursor-pointer hover:bg-accent transition-colors duration-300"
             >
               <div className="flex items-center gap-4 md:gap-16">
-                <P size="lg" className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
+                <P
+                  size="lg"
+                  className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground"
+                >
                   {String(i + 1).padStart(2, "0")}
                 </P>
                 <H3 className="transition-transform duration-300 group-hover:translate-x-2">
@@ -47,7 +56,10 @@ export async function WorksList({ projects }: { projects: SanityProjectListing[]
                     {project.category}
                   </span>
                   {project.stack.slice(0, 2).map((tech) => (
-                    <span key={tech} className="px-4 py-1 border border-border text-body-sm text-muted-foreground font-semibold">
+                    <span
+                      key={tech}
+                      className="px-4 py-1 border border-border text-body-sm text-muted-foreground font-semibold"
+                    >
                       {tech}
                     </span>
                   ))}

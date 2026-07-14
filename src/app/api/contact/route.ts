@@ -1,8 +1,8 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { contactSchema } from "@/lib/schemas/contact";
-import { ContactNotification } from "@/emails/contact-notification";
 import { ContactConfirmation } from "@/emails/contact-confirmation";
+import { ContactNotification } from "@/emails/contact-notification";
+import { contactSchema } from "@/lib/schemas/contact";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -47,7 +47,10 @@ export async function POST(request: NextRequest) {
       "http://localhost:3000",
     ];
     if (origin && !allowedOrigins.includes(origin)) {
-      return NextResponse.json({ error: "Origem não permitida" }, { status: 403 });
+      return NextResponse.json(
+        { error: "Origem não permitida" },
+        { status: 403 },
+      );
     }
 
     // ── Rate limit ───────────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export type TocSection = { id: string; title: string; level: "h2" | "h3" };
 
@@ -53,9 +53,7 @@ export function PostSidebarToc({ sections }: { sections: TocSection[] }) {
             >
               <span
                 className={`leading-snug max-w-[90px] transition-all duration-300 ${
-                  isH3
-                    ? "text-[10px] max-w-[78px] opacity-80"
-                    : "text-label-xs"
+                  isH3 ? "text-[10px] max-w-[78px] opacity-80" : "text-label-xs"
                 }`}
               >
                 {section.title}

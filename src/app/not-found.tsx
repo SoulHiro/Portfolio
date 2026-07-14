@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { MoveLeft } from "lucide-react";
+import Link from "next/link";
 import { MouseCoords } from "@/components/mouse-coords";
 
 export default function RootNotFound() {
@@ -21,7 +21,8 @@ export default function RootNotFound() {
 
             <div className="flex flex-col gap-8 max-w-md">
               <p className="text-body-md text-muted-foreground leading-relaxed">
-                A página que você tentou acessar não existe ou foi movida para outro endereço.
+                A página que você tentou acessar não existe ou foi movida para
+                outro endereço.
               </p>
 
               <Link

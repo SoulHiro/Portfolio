@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useCallback, useState } from "react";
 import { useKonami } from "@/hooks/use-konami";
 
 const PARTICLES = Array.from({ length: 28 }, (_, i) => {

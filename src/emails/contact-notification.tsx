@@ -1,14 +1,14 @@
-import { Section, Hr } from "@react-email/components";
+import { Hr, Section } from "@react-email/components";
 import {
-  EmailLayout,
   Badge,
+  colors,
   DataCard,
   EmailButton,
+  EmailLayout,
   FieldRow,
   FooterText,
   Heading,
   Paragraph,
-  colors,
 } from "./email-layout";
 
 type Props = {
@@ -25,7 +25,9 @@ export function ContactNotification({ name, email, subject, message }: Props) {
       footer={
         <>
           <FooterText>Notificação automática — Victor M. Santos</FooterText>
-          <FooterText>Enviada via formulário de contato em victormts.dev</FooterText>
+          <FooterText>
+            Enviada via formulário de contato em victormts.dev
+          </FooterText>
         </>
       }
     >
@@ -48,11 +50,14 @@ export function ContactNotification({ name, email, subject, message }: Props) {
       </DataCard>
 
       <Paragraph muted>
-        Responda diretamente este email ou clique abaixo para responder ao remetente.
+        Responda diretamente este email ou clique abaixo para responder ao
+        remetente.
       </Paragraph>
 
       <Section style={{ marginTop: "24px" }}>
-        <EmailButton href={`mailto:${email}`}>{`Responder → ${name}`}</EmailButton>
+        <EmailButton
+          href={`mailto:${email}`}
+        >{`Responder → ${name}`}</EmailButton>
       </Section>
     </EmailLayout>
   );

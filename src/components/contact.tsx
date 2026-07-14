@@ -1,15 +1,8 @@
 import { getTranslations } from "next-intl/server";
-import { H2, P } from "@/components/ui/typography";
 import { ContactForm } from "@/components/contact-form";
+import { H2, P } from "@/components/ui/typography";
 
 const EMAIL = "victormts.s1@gmail.com";
-
-const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/victormts/" },
-  { label: "Github", href: "https://github.com/SoulHiro" },
-  { label: "Instagram", href: "https://www.instagram.com/soulhirostudio" },
-  { label: "Youtube", href: "https://www.youtube.com/@soulhirostudio" },
-];
 
 export async function Contact() {
   const t = await getTranslations("Contact");
@@ -21,42 +14,40 @@ export async function Contact() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full">
         {/* Left — info */}
-        <div className="flex flex-col gap-8 justify-center">
+        <div data-reveal className="flex flex-col gap-8 justify-center">
           <H2>
             {t("title1")}{" "}
-            <span className="text-muted-foreground italic">{t("titleHighlight")}</span>
-            <br />
-            {t("title2")}
+            <span className="text-muted-foreground italic">
+              {t("titleHighlight")}
+            </span>
           </H2>
-          <P size="lg" className="text-muted-foreground font-light">
+
+          <P size="lg" className="text-muted-foreground font-light max-w-xs">
             {t("description")}
           </P>
+
+          <address className="not-italic flex flex-col gap-1.5">
+            <span className="font-display text-h3 italic leading-tight tracking-tight">
+              R. País Leme, 215 — Conj. 1713
+            </span>
+            <span className="text-body-md text-muted-foreground">
+              Pinheiros · São Paulo, SP
+            </span>
+            <span className="font-mono text-label-sm text-muted-foreground/50 mt-1">
+              CEP 05424-150
+            </span>
+          </address>
+
           <a
             href={`mailto:${EMAIL}`}
             className="text-body-md text-muted-foreground hover:text-foreground transition-colors duration-300 w-fit"
           >
             {EMAIL}
           </a>
-          <div className="flex flex-wrap gap-4 md:gap-8">
-            {socials.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 group/social"
-              >
-                <span className="size-1.5 rounded-full bg-muted-foreground" />
-                <P size="lg" className="text-muted-foreground transition-colors duration-300 group-hover/social:text-foreground">
-                  {social.label}
-                </P>
-              </a>
-            ))}
-          </div>
         </div>
 
         {/* Right — form */}
-        <div className="flex flex-col justify-center">
+        <div data-reveal className="flex flex-col justify-center">
           <ContactForm />
         </div>
       </div>

@@ -7,7 +7,10 @@ const LAB_TYPES = ["labProject", "labStatus", "labSettings"];
 export async function POST(req: NextRequest) {
   const secret = req.nextUrl.searchParams.get("secret");
 
-  if (!process.env.REVALIDATE_SECRET || secret !== process.env.REVALIDATE_SECRET) {
+  if (
+    !process.env.REVALIDATE_SECRET ||
+    secret !== process.env.REVALIDATE_SECRET
+  ) {
     return NextResponse.json({ error: "Invalid secret" }, { status: 401 });
   }
 

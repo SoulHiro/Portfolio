@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function MouseCoords() {
   const [coords, setCoords] = useState({ x: 0, y: 0 });

@@ -103,7 +103,9 @@ export type SanityProjectFull = {
   stack: { name: string; category: string }[] | null;
   challenge: string | null;
   approach: string | null;
-  features: { title: string; description: string; image: SanityImageValue }[] | null;
+  features:
+    | { title: string; description: string; image: SanityImageValue }[]
+    | null;
   gallery: (SanityImageValue & { alt?: string })[] | null;
   results: { metric: string; label: string; detail: string }[] | null;
   testimonial: { quote: string; author: string; role: string } | null;

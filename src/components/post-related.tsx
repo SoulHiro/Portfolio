@@ -1,5 +1,5 @@
-import { Link } from "@/i18n/navigation";
 import { MoveLeft, MoveRight } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import type { SanityPostListing } from "@/lib/sanity/types";
 
 function formatDate(iso: string) {

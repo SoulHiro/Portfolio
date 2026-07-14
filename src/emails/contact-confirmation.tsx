@@ -1,8 +1,8 @@
 import { Section } from "@react-email/components";
 import {
-  EmailLayout,
   Badge,
   EmailButton,
+  EmailLayout,
   FooterText,
   Heading,
   Paragraph,
@@ -22,7 +22,10 @@ export function ContactConfirmation({ name, subject }: Props) {
         <>
           <SocialLinks />
           <FooterText>{`© ${new Date().getFullYear()} Victor M. Santos. Todos os direitos reservados.`}</FooterText>
-          <FooterText>Você recebeu este email porque enviou uma mensagem pelo formulário de contato.</FooterText>
+          <FooterText>
+            Você recebeu este email porque enviou uma mensagem pelo formulário
+            de contato.
+          </FooterText>
         </>
       }
     >
@@ -33,17 +36,21 @@ export function ContactConfirmation({ name, subject }: Props) {
       </Section>
 
       <Paragraph>
-        Obrigado por entrar em contato. Recebi sua mensagem e retornarei com uma resposta em até{" "}
+        Obrigado por entrar em contato. Recebi sua mensagem e retornarei com uma
+        resposta em até{" "}
         <strong style={{ color: "#f0f0f0" }}>48 horas úteis</strong>.
       </Paragraph>
 
       <Paragraph>
-        Enquanto isso, fique à vontade para explorar meus projetos e conhecer um pouco mais do{" "}
-        <strong style={{ color: "#f0f0f0" }}>meu trabalho</strong>.
+        Enquanto isso, fique à vontade para explorar meus projetos e conhecer um
+        pouco mais do <strong style={{ color: "#f0f0f0" }}>meu trabalho</strong>
+        .
       </Paragraph>
 
       <Section style={{ marginTop: "32px" }}>
-        <EmailButton href="https://www.victormts.dev">Ver portfólio →</EmailButton>
+        <EmailButton href="https://www.victormts.dev">
+          Ver portfólio →
+        </EmailButton>
       </Section>
     </EmailLayout>
   );

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.victormts.dev";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.victormts.dev";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,12 +9,12 @@ export default function robots(): MetadataRoute.Robots {
       // Scrapers de treinamento — coletam e somem, não trazem tráfego
       {
         userAgent: [
-          "GPTBot",          // OpenAI training crawler
-          "CCBot",           // Common Crawl (base do GPT-3/4)
-          "anthropic-ai",    // Anthropic training
-          "ClaudeBot",       // Anthropic training crawler
+          "GPTBot", // OpenAI training crawler
+          "CCBot", // Common Crawl (base do GPT-3/4)
+          "anthropic-ai", // Anthropic training
+          "ClaudeBot", // Anthropic training crawler
           "Google-Extended", // Google Gemini training
-          "Bytespider",      // ByteDance / TikTok training
+          "Bytespider", // ByteDance / TikTok training
           "Applebot-Extended",
           "cohere-ai",
           "Diffbot",

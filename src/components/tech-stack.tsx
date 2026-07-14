@@ -12,7 +12,9 @@ function Diamond({ filled = false }: { filled?: boolean }) {
 }
 
 function Circle() {
-  return <div className="size-5 rounded-full border-[1.5px] border-foreground" />;
+  return (
+    <div className="size-5 rounded-full border-[1.5px] border-foreground" />
+  );
 }
 
 type SkillCardProps = {
@@ -28,7 +30,10 @@ function SkillCard({ icon, title, description, tags }: SkillCardProps) {
       {icon}
       <div className="flex flex-col gap-3">
         <H3 className="transition-colors duration-300">{title}</H3>
-        <P size="lg" className="text-muted-foreground font-light transition-colors duration-300">
+        <P
+          size="lg"
+          className="text-muted-foreground font-light transition-colors duration-300"
+        >
           {description}
         </P>
       </div>
@@ -54,13 +59,28 @@ export async function TechStack() {
       icon: <Diamond filled />,
       title: t("frontend"),
       description: t("frontendDesc"),
-      tags: ["NEXT.JS", "REACT", "TYPESCRIPT", "TAILWIND CSS", "REACT NATIVE", "MOTION"],
+      tags: [
+        "NEXT.JS",
+        "REACT",
+        "TYPESCRIPT",
+        "TAILWIND CSS",
+        "REACT NATIVE",
+        "MOTION",
+      ],
     },
     {
       icon: <Diamond />,
       title: t("backend"),
       description: t("backendDesc"),
-      tags: ["NODE.JS", "NEST.JS", "GO", "PYTHON", "POSTGRESQL", "REDIS", "DOCKER"],
+      tags: [
+        "NODE.JS",
+        "NEST.JS",
+        "GO",
+        "PYTHON",
+        "POSTGRESQL",
+        "REDIS",
+        "DOCKER",
+      ],
     },
     {
       icon: <Circle />,
