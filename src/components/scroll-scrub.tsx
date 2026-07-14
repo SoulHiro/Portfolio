@@ -46,7 +46,6 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
       const hpHeader =
         ref.current?.querySelector<HTMLElement>("[data-hp-header]");
       const hpCat = ref.current?.querySelector<HTMLElement>("[data-hp-cat]");
-      const hpHat = ref.current?.querySelector<HTMLElement>("[data-hp-hat]");
       const hpTitle =
         ref.current?.querySelector<HTMLElement>("[data-hp-title]");
       const hpGrid = ref.current?.querySelector<HTMLElement>("[data-hp-grid]");
@@ -54,10 +53,9 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
         ref.current?.querySelectorAll<HTMLElement>("[data-hp-card]") ?? [],
       );
 
-      if (hpHeader && hpCat && hpHat && hpTitle) {
+      if (hpHeader && hpCat && hpTitle) {
         // Initial hidden states — prevents flash before trigger fires
         gsap.set(hpCat, { opacity: 0, y: 40 });
-        gsap.set(hpHat, { opacity: 0, scale: 0, transformOrigin: "50% 50%" });
         gsap.set(hpTitle, { opacity: 0, y: 24 });
 
         const headerTl = gsap.timeline();
@@ -74,19 +72,7 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
           0,
         );
 
-        // 2 — Hat zooms in while cat is still settling (overlap at t=0.6)
-        headerTl.to(
-          hpHat,
-          {
-            opacity: 1,
-            scale: 1,
-            ease: "back.out(1.7)",
-            duration: 0.9,
-          },
-          0.6,
-        );
-
-        // 3 — Title slides in from below
+        // 2 — Title slides in from below
         headerTl.to(
           hpTitle,
           {
@@ -95,7 +81,7 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
             ease: "power2.out",
             duration: 0.8,
           },
-          1.1,
+          0.7,
         );
 
         ScrollTrigger.create({
@@ -104,32 +90,6 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
           end: "center 50%",
           scrub: 1,
           animation: headerTl,
-        });
-
-        // Hat hover — same feel as hero prop hover
-        const onHatEnter = () => {
-          gsap.to(hpHat, {
-            rotate: -10,
-            y: -10,
-            duration: 0.4,
-            ease: "power2.out",
-            transformOrigin: "50% 100%",
-          });
-        };
-        const onHatLeave = () => {
-          gsap.to(hpHat, {
-            rotate: 0,
-            y: 0,
-            duration: 0.5,
-            ease: "elastic.out(1, 0.5)",
-          });
-        };
-        hpHat.style.cursor = "pointer";
-        hpHat.addEventListener("mouseenter", onHatEnter);
-        hpHat.addEventListener("mouseleave", onHatLeave);
-        cleanupFns.push(() => {
-          hpHat.removeEventListener("mouseenter", onHatEnter);
-          hpHat.removeEventListener("mouseleave", onHatLeave);
         });
       }
 

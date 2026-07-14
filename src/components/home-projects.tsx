@@ -187,14 +187,6 @@ export async function HomeProjects() {
         className="flex flex-col items-center mb-12 relative"
       >
         <img
-          src="/hat.svg"
-          alt=""
-          aria-hidden="true"
-          data-hp-hat=""
-          className="w-20 h-auto mb-2 rotate-[18deg]"
-        />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
           src="/cat.svg"
           alt=""
           aria-hidden="true"
