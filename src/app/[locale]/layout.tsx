@@ -7,7 +7,6 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ConsoleEgg } from "@/components/easter-eggs/console-egg";
 import { KonamiEgg } from "@/components/easter-eggs/konami-egg";
 import { LogoEgg } from "@/components/easter-eggs/logo-egg";
-import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { SideSocials } from "@/components/side-socials";
@@ -92,7 +91,6 @@ export default async function LocaleLayout({ children, params }: Props) {
         <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           {children}
         </main>
-        <Footer />
       </NuqsAdapter>
       <Analytics />
     </NextIntlClientProvider>

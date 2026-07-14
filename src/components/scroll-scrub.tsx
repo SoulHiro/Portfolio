@@ -98,8 +98,8 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
 
         ScrollTrigger.create({
           trigger: hpHeader,
-          start: "top 80%",
-          end: "center 30%",
+          start: "top 85%",
+          end: "center 50%",
           scrub: 1,
           animation: headerTl,
         });
@@ -110,7 +110,6 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
 
         const cardsTl = gsap.timeline();
         hpCards.forEach((card, i) => {
-          // Stagger: each card starts 0.3 timeline units after the previous
           cardsTl.to(
             card,
             {
@@ -125,8 +124,8 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
 
         ScrollTrigger.create({
           trigger: hpGrid,
-          start: "top 85%",
-          end: "bottom 15%",
+          start: "top 90%",
+          end: "center 55%",
           scrub: 0.8,
           animation: cardsTl,
         });

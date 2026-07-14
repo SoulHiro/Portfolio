@@ -45,7 +45,7 @@ export function Experience() {
         const right = row.querySelector<HTMLElement>("[data-cell='right']");
 
         if (left) {
-          const st = gsap.fromTo(
+          const stIn = gsap.fromTo(
             left,
             { opacity: 0, x: -28 },
             {
@@ -60,11 +60,28 @@ export function Experience() {
               },
             },
           );
-          if (st.scrollTrigger) triggers.push(st.scrollTrigger);
+          if (stIn.scrollTrigger) triggers.push(stIn.scrollTrigger);
+
+          const stOut = gsap.fromTo(
+            left,
+            { opacity: 1, x: 0 },
+            {
+              opacity: 0,
+              x: -28,
+              ease: "power2.in",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 8%",
+                end: "top -20%",
+                scrub: 0.6,
+              },
+            },
+          );
+          if (stOut.scrollTrigger) triggers.push(stOut.scrollTrigger);
         }
 
         if (right) {
-          const st = gsap.fromTo(
+          const stIn = gsap.fromTo(
             right,
             { opacity: 0, x: 28 },
             {
@@ -79,7 +96,24 @@ export function Experience() {
               },
             },
           );
-          if (st.scrollTrigger) triggers.push(st.scrollTrigger);
+          if (stIn.scrollTrigger) triggers.push(stIn.scrollTrigger);
+
+          const stOut = gsap.fromTo(
+            right,
+            { opacity: 1, x: 0 },
+            {
+              opacity: 0,
+              x: 28,
+              ease: "power2.in",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 8%",
+                end: "top -20%",
+                scrub: 0.6,
+              },
+            },
+          );
+          if (stOut.scrollTrigger) triggers.push(stOut.scrollTrigger);
         }
       });
     };
