@@ -191,14 +191,32 @@
     -webkit-user-select: none;
   }
 
-  img, a {
+  img,
+  a {
     -webkit-user-drag: none;
+    /* biome-ignore lint/correctness/noUnknownProperty: vendor-prefixed drag disable */
     user-drag: none;
   }
 
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes float-gentle {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(1deg);
+  }
+}
+.float-anim {
+  animation: float-gentle 3s ease-in-out infinite;
+}
+.float-anim-slow {
+  animation: float-gentle 4s ease-in-out infinite reverse;
 }
 
 /* Grain overlay — z-index must be positive so it sits above bg-background */
@@ -213,4 +231,3 @@ body::after {
   background-repeat: repeat;
   background-size: 256px 256px;
 }
-

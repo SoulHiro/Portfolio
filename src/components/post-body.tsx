@@ -15,24 +15,17 @@ function SectionSeparator() {
   );
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: portabletext requires any for components map
 const portableTextComponents: any = {
   types: {
-    code: ({ value }: { value: { code: string; language?: string; filename?: string } }) => (
-      <PostCodeBlock value={value} />
-    ),
-  },
-  block: {
-    h2: ({
-      children,
+    code: ({
       value,
     }: {
-      children: React.ReactNode;
-      // biome-ignore lint/suspicious/noExplicitAny: portabletext value
-      value: any;
-    }) => {
+      value: { code: string; language?: string; filename?: string };
+    }) => <PostCodeBlock value={value} />,
+  },
+  block: {
+    h2: ({ children, value }: { children: React.ReactNode; value: any }) => {
       const text = (value?.children ?? [])
-        // biome-ignore lint/suspicious/noExplicitAny: portabletext span
         .map((c: any) => c.text ?? "")
         .join("");
       const id = text
@@ -45,16 +38,8 @@ const portableTextComponents: any = {
         </H2>
       );
     },
-    h3: ({
-      children,
-      value,
-    }: {
-      children: React.ReactNode;
-      // biome-ignore lint/suspicious/noExplicitAny: portabletext value
-      value: any;
-    }) => {
+    h3: ({ children, value }: { children: React.ReactNode; value: any }) => {
       const text = (value?.children ?? [])
-        // biome-ignore lint/suspicious/noExplicitAny: portabletext span
         .map((c: any) => c.text ?? "")
         .join("");
       const id = text
@@ -62,7 +47,10 @@ const portableTextComponents: any = {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "");
       return (
-        <H3 id={id} className="mt-6 md:mt-8 mb-3 md:mb-4 font-sans font-semibold text-h4 scroll-mt-28">
+        <H3
+          id={id}
+          className="mt-6 md:mt-8 mb-3 md:mb-4 font-sans font-semibold text-h4 scroll-mt-28"
+        >
           {children}
         </H3>
       );
@@ -151,10 +139,12 @@ export function PostBody({ body }: { body: unknown[] }) {
   return (
     <div>
       {sections.map((section, i) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: sections are static content
         <div key={i}>
           {i > 0 && <SectionSeparator />}
-          <PortableText value={section as any} components={portableTextComponents} />
+          <PortableText
+            value={section as any}
+            components={portableTextComponents}
+          />
         </div>
       ))}
     </div>

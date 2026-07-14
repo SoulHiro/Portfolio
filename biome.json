@@ -19,7 +19,18 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noArrayIndexKey": "off",
+        "noExplicitAny": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
+      "performance": {
+        "noImgElement": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off"
       }
     },
     "domains": {

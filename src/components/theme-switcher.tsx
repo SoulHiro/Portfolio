@@ -14,6 +14,7 @@ export function ThemeSwitcher() {
 
   return (
     <button
+      type="button"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className="flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-pointer"
       aria-label="Alternar tema"

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useQueryStates, parseAsString } from "nuqs";
-import { Link, useRouter } from "@/i18n/navigation";
-import { H4, P, Label } from "@/components/ui/typography";
 import { MoveRight, Search, X } from "lucide-react";
+import { parseAsString, useQueryStates } from "nuqs";
+import { useEffect, useRef, useState } from "react";
+import { H4, P } from "@/components/ui/typography";
+import { Link, useRouter } from "@/i18n/navigation";
 import type { SanityPostListing } from "@/lib/sanity/types";
 
 const MONTHS_PER_PAGE = 3;
@@ -26,12 +26,20 @@ function parseUTC(iso: string) {
 
 function formatMonthYear(iso: string) {
   const { y, m } = parseUTC(iso);
-  return new Date(Date.UTC(y, m, 1)).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
+  return new Date(Date.UTC(y, m, 1)).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 function formatDate(iso: string) {
   const { y, m, day } = parseUTC(iso);
-  return new Date(Date.UTC(y, m, day)).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
+  return new Date(Date.UTC(y, m, day)).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 function getYear(iso: string) {
@@ -50,7 +58,13 @@ function groupByMonth(posts: SanityPostListing[]) {
 }
 
 /* ─── Search autocomplete ─── */
-function SearchBox({ posts, readMin }: { posts: SanityPostListing[]; readMin: string }) {
+function SearchBox({
+  posts,
+  readMin,
+}: {
+  posts: SanityPostListing[];
+  readMin: string;
+}) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -73,7 +87,10 @@ function SearchBox({ posts, readMin }: { posts: SanityPostListing[]; readMin: st
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setOpen(false);
         setActiveIndex(-1);
       }
@@ -184,7 +201,9 @@ function SearchBox({ posts, readMin }: { posts: SanityPostListing[]; readMin: st
                   </span>
                   <span className="text-label-xs text-muted-foreground/50 font-mono shrink-0">
                     {formatDate(post.publishedAt)}
-                    {post.estimatedReadingTime ? ` · ${post.estimatedReadingTime} ${readMin}` : ""}
+                    {post.estimatedReadingTime
+                      ? ` · ${post.estimatedReadingTime} ${readMin}`
+                      : ""}
                   </span>
                 </div>
 
@@ -204,7 +223,13 @@ function SearchBox({ posts, readMin }: { posts: SanityPostListing[]; readMin: st
 }
 
 /* ─── Post Card — portrait ─── */
-function PostCard({ post, readMin }: { post: SanityPostListing; readMin: string }) {
+function PostCard({
+  post,
+  readMin,
+}: {
+  post: SanityPostListing;
+  readMin: string;
+}) {
   return (
     <Link href={`/works/${post.slug}`}>
       <div className="group border border-border p-5 flex flex-col aspect-[3/4] max-h-[400px] hover:bg-accent transition-colors duration-300">
@@ -223,7 +248,9 @@ function PostCard({ post, readMin }: { post: SanityPostListing; readMin: string 
           </H4>
           <span className="text-label-xs text-muted-foreground/60">
             {formatDate(post.publishedAt)}
-            {post.estimatedReadingTime ? ` · ${post.estimatedReadingTime} ${readMin}` : ""}
+            {post.estimatedReadingTime
+              ? ` · ${post.estimatedReadingTime} ${readMin}`
+              : ""}
           </span>
         </div>
       </div>
@@ -240,6 +267,7 @@ export function WorksContent({ posts, labels }: Props) {
 
   const [visibleMonths, setVisibleMonths] = useState(MONTHS_PER_PAGE);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: primitive values from nuqs, more precise than full filters object
   useEffect(() => {
     setVisibleMonths(MONTHS_PER_PAGE);
   }, [filters.cat, filters.yr]);
@@ -248,9 +276,9 @@ export function WorksContent({ posts, labels }: Props) {
     new Set(posts.map((p) => p.category).filter(Boolean) as string[]),
   ).sort();
 
-  const years = Array.from(new Set(posts.map((p) => getYear(p.publishedAt)))).sort(
-    (a, b) => Number(b) - Number(a),
-  );
+  const years = Array.from(
+    new Set(posts.map((p) => getYear(p.publishedAt))),
+  ).sort((a, b) => Number(b) - Number(a));
 
   const filteredPosts = posts.filter((p) => {
     const matchCat = !filters.cat || p.category === filters.cat;
@@ -288,7 +316,9 @@ export function WorksContent({ posts, labels }: Props) {
             <button
               key={cat}
               type="button"
-              onClick={() => setFilters({ cat: filters.cat === cat ? null : cat })}
+              onClick={() =>
+                setFilters({ cat: filters.cat === cat ? null : cat })
+              }
               className={`${pillBase} ${filters.cat === cat ? pillActive : pillInactive}`}
             >
               {cat}
@@ -302,7 +332,9 @@ export function WorksContent({ posts, labels }: Props) {
                 <button
                   key={yr}
                   type="button"
-                  onClick={() => setFilters({ yr: filters.yr === yr ? null : yr })}
+                  onClick={() =>
+                    setFilters({ yr: filters.yr === yr ? null : yr })
+                  }
                   className={`${pillBase} font-mono ${filters.yr === yr ? pillActive : pillInactive}`}
                 >
                   {yr}
@@ -344,7 +376,11 @@ export function WorksContent({ posts, labels }: Props) {
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-0">
                 {groupPosts.map((post) => (
-                  <PostCard key={post._id} post={post} readMin={labels.readMin} />
+                  <PostCard
+                    key={post._id}
+                    post={post}
+                    readMin={labels.readMin}
+                  />
                 ))}
               </div>
             </div>

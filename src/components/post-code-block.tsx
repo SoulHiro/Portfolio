@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { useState } from "react";
 
 type Props = {
   value: {
@@ -29,6 +29,7 @@ export function PostCodeBlock({ value }: Props) {
           {value.filename ?? value.language ?? "code"}
         </span>
         <button
+          type="button"
           onClick={copy}
           className="flex items-center gap-1.5 text-label-xs text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
           aria-label="Copiar código"

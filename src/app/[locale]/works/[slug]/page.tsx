@@ -1,17 +1,21 @@
-import { setRequestLocale } from "next-intl/server";
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import { client } from "@/lib/sanity/client";
-import { POST_BY_SLUG_QUERY, ALL_POST_SLUGS_QUERY, RELATED_POSTS_QUERY } from "@/lib/sanity/queries";
-import type { SanityPostFull, SanityPostListing } from "@/lib/sanity/types";
-import { H1, P, Label } from "@/components/ui/typography";
-import { Link } from "@/i18n/navigation";
 import { MoveLeft } from "lucide-react";
-import { ProgressRead } from "@/components/progress-read";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { PostBody } from "@/components/post-body";
+import { PostRelated } from "@/components/post-related";
 import { PostSidebarShare } from "@/components/post-sidebar-share";
 import { PostSidebarToc, type TocSection } from "@/components/post-sidebar-toc";
-import { PostRelated } from "@/components/post-related";
+import { ProgressRead } from "@/components/progress-read";
+import { Label, P } from "@/components/ui/typography";
+import { Link } from "@/i18n/navigation";
+import { client } from "@/lib/sanity/client";
+import {
+  ALL_POST_SLUGS_QUERY,
+  POST_BY_SLUG_QUERY,
+  RELATED_POSTS_QUERY,
+} from "@/lib/sanity/queries";
+import type { SanityPostFull, SanityPostListing } from "@/lib/sanity/types";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -28,7 +32,10 @@ const BASE_META_URL = "https://www.victormts.dev";
 /* ─── Metadata ─── */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = await client.fetch<SanityPostFull | null>(POST_BY_SLUG_QUERY, { slug, locale });
+  const post = await client.fetch<SanityPostFull | null>(POST_BY_SLUG_QUERY, {
+    slug,
+    locale,
+  });
   if (!post) return {};
 
   const otherLocale = locale === "en" ? "pt-br" : "en";
@@ -75,7 +82,10 @@ function extractSections(body: unknown[]): TocSection[] {
   return body
     .filter((b) => {
       const block = b as { _type?: string; style?: string };
-      return block._type === "block" && (block.style === "h2" || block.style === "h3");
+      return (
+        block._type === "block" &&
+        (block.style === "h2" || block.style === "h3")
+      );
     })
     .map((b) => {
       const block = b as { style?: string; children?: { text?: string }[] };
@@ -135,8 +145,16 @@ export default async function PostPage({ params }: Props) {
         datePublished: post.publishedAt,
         dateModified: post.publishedAt,
         image: `${BASE_META_URL}/og.webp`,
-        author: { "@type": "Person", "@id": personId, name: "Victor M. Santos" },
-        publisher: { "@type": "Person", "@id": personId, name: "Victor M. Santos" },
+        author: {
+          "@type": "Person",
+          "@id": personId,
+          name: "Victor M. Santos",
+        },
+        publisher: {
+          "@type": "Person",
+          "@id": personId,
+          name: "Victor M. Santos",
+        },
         mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
         ...(post.tags ? { keywords: post.tags.join(", ") } : {}),
       },
@@ -195,7 +213,10 @@ export default async function PostPage({ params }: Props) {
 
           {/* Excerpt */}
           {post.excerpt && (
-            <P size="lg" className="text-muted-foreground max-w-2xl font-light leading-[1.7]">
+            <P
+              size="lg"
+              className="text-muted-foreground max-w-2xl font-light leading-[1.7]"
+            >
               {post.excerpt}
             </P>
           )}

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import {
-  Outfit,
   Instrument_Serif,
   JetBrains_Mono,
   Noto_Sans_KR,
+  Outfit,
 } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -71,7 +71,8 @@ const jsonLd = {
       "@id": "https://www.victormts.dev/#website",
       url: "https://www.victormts.dev",
       name: "Victor M. Santos",
-      description: "Portfolio, devlog, and lab of Victor M. Santos — software developer and product designer.",
+      description:
+        "Portfolio, devlog, and lab of Victor M. Santos — software developer and product designer.",
       author: { "@id": "https://www.victormts.dev/#person" },
       inLanguage: ["pt-BR", "en"],
     },
@@ -107,8 +108,7 @@ export default async function RootLayout({
       <body className="min-h-screen flex flex-col">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
           disableTransitionOnChange
         >
           {children}

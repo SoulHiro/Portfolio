@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const GLITCH_CHARS = "0123456789!@#$%".split("");
-const pick = () => GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+const pick = () =>
+  GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
 
 export function Glitch404() {
   const [digits, setDigits] = useState(["4", "0", "4"]);
@@ -12,20 +13,17 @@ export function Glitch404() {
   const [busy, setBusy] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const runGlitch = useCallback(
-    (onDone?: () => void) => {
-      let tick = 0;
-      timerRef.current = setInterval(() => {
-        setDigits([pick(), pick(), pick()]);
-        tick++;
-        if (tick >= 14) {
-          clearInterval(timerRef.current!);
-          onDone?.();
-        }
-      }, 40);
-    },
-    [],
-  );
+  const runGlitch = useCallback((onDone?: () => void) => {
+    let tick = 0;
+    timerRef.current = setInterval(() => {
+      setDigits([pick(), pick(), pick()]);
+      tick++;
+      if (tick >= 14) {
+        clearInterval(timerRef.current!);
+        onDone?.();
+      }
+    }, 40);
+  }, []);
 
   const triggerEgg = useCallback(() => {
     if (busy) return;

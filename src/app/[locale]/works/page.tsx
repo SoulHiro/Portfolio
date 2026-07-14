@@ -1,12 +1,11 @@
-import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
-import { H1, P, Label } from "@/components/ui/typography";
+import { H1, Label, P } from "@/components/ui/typography";
+import { WorksContent } from "@/components/works-content";
 import { client } from "@/lib/sanity/client";
 import { POSTS_QUERY } from "@/lib/sanity/queries";
 import type { SanityPostListing } from "@/lib/sanity/types";
-
-import { WorksContent } from "@/components/works-content";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -83,30 +82,32 @@ export default async function WorksPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogLd) }}
       />
-    <section className="flex flex-col gap-16 py-24">
-      {/* Header */}
-      <div>
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-2.5">
-            <Label size="sm" className="text-muted-foreground tracking-[4px]">
-              {t("label")}
-            </Label>
+      <section className="flex flex-col gap-16 py-24">
+        {/* Header */}
+        <div>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2.5">
+              <Label size="sm" className="text-muted-foreground tracking-[4px]">
+                {t("label")}
+              </Label>
+            </div>
+            <H1 className="text-display-xl">{t("title")}</H1>
           </div>
-          <H1 className="text-display-xl">{t("title")}</H1>
+          <P className="text-muted-foreground max-w-lg mt-6">
+            {t("description")}
+          </P>
         </div>
-        <P className="text-muted-foreground max-w-lg mt-6">{t("description")}</P>
-      </div>
 
-      <Suspense>
-        <WorksContent
-          posts={posts}
-          labels={{
-            readMin: t("readMin"),
-            noPosts: t("noPosts"),
-          }}
-        />
-      </Suspense>
-    </section>
+        <Suspense>
+          <WorksContent
+            posts={posts}
+            labels={{
+              readMin: t("readMin"),
+              noPosts: t("noPosts"),
+            }}
+          />
+        </Suspense>
+      </section>
     </>
   );
 }
