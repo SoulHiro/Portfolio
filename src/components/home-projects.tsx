@@ -187,6 +187,14 @@ export async function HomeProjects() {
         className="flex flex-col items-center mb-12 relative"
       >
         <img
+          src="/hat.svg"
+          alt=""
+          aria-hidden="true"
+          data-hp-hat=""
+          className="w-10 h-auto left-156 mb-2 absolute"
+          style={{ top: "0.5rem", rotate: "15deg" }}
+        />
+        <img
           src="/cat.svg"
           alt=""
           aria-hidden="true"
