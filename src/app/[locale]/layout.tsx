@@ -9,6 +9,8 @@ import { KonamiEgg } from "@/components/easter-eggs/konami-egg";
 import { LogoEgg } from "@/components/easter-eggs/logo-egg";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { SideSocials } from "@/components/side-socials";
 import { routing } from "@/i18n/routing";
 
 type Props = {
@@ -85,7 +87,11 @@ export default async function LocaleLayout({ children, params }: Props) {
         <LogoEgg />
         <KonamiEgg />
         <Navbar />
-        <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8">{children}</main>
+        <SideSocials />
+        <ScrollProgress />
+        <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          {children}
+        </main>
         <Footer />
       </NuqsAdapter>
       <Analytics />

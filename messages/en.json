@@ -4,16 +4,46 @@
     "description": "Software developer and product designer crafting digital experiences with purpose."
   },
   "Nav": {
-    "about": "About",
-    "devlog": "Devlog",
-    "lab": "Lab",
+    "expertise": "Expertise",
+    "work": "Work",
     "contact": "Contact",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
   "Hero": {
-    "description": "Building digital products with systemic vision — from business problem to interface, through architecture and experience.",
-    "cta": "Get in touch"
+    "level": "Pleno",
+    "bioTitle": "Who I am.",
+    "remote": "Remote friendly",
+    "languages": "PT Native · EN Basic",
+    "bio": "Freelance fullstack engineer for 2 years, taking products from zero to production solo, architecture, frontend, infrastructure. Worked across ecommerce and SaaS. I think about what ships and why it should exist.",
+    "cta": "Get in touch",
+    "cvCta": "Curriculum Vitae"
+  },
+  "Expertise": {
+    "title": "What I",
+    "titleHighlight": "do well",
+    "item1Title": "Frontend Engineering",
+    "item1Desc": "Building interfaces that feel right. From design system to rendered screen, with performance and accessibility built in from the start.",
+    "item2Title": "Architecture & Systems",
+    "item2Desc": "Designing APIs and data layers that hold up under real load. Full ownership from schema to deploy, in Node.js, Go, and PostgreSQL.",
+    "item3Title": "Product Thinking",
+    "item3Desc": "As a founder, I ask why before how. I care about the problem being solved, not just the stack solving it."
+  },
+  "Experience": {
+    "title": "",
+    "titleHighlight": "Timeline",
+    "item1Period": "2022",
+    "item1Role": "IT Technician",
+    "item1Field": "Technology & Operations",
+    "item1Desc": "Managed full IT infrastructure for a restaurant: institutional website, POS systems, and hardware. Also supported pricing and administrative routines.",
+    "item2Period": "2023 — Present",
+    "item2Role": "Web Developer",
+    "item2Field": "Non-profit",
+    "item2Desc": "Built and maintain the institutional website for Doutores Palhaços, a Brazilian NGO bringing humor and art to hospitalized children.",
+    "item3Period": "2024 — Present",
+    "item3Role": "Freelance Engineer",
+    "item3Field": "Frontend & Fullstack",
+    "item3Desc": "Building production web applications in React and Next.js for clients across ecommerce and SaaS."
   },
   "HomeDevlog": {
     "label": "DEVLOG",
@@ -87,19 +117,24 @@
     "wip": "In progress",
     "viewProject": "View project",
     "ambar": {
-      "description": "Fashion ecommerce for A/B demographics. Auth, product catalog with variants, checkout and admin panel.",
+      "description": "",
       "imageAlt": "Couple in autumn coats in a foggy park — Âmbar editorial campaign"
     },
-    "portfolio": {
-      "description": "This website. Next.js App Router, Sanity CMS, i18n, ISR and custom design system.",
-      "imageAlt": "SoulHiro Studio — portfolio visual identity"
-    }
+    "campomind": {
+      "description": "SaaS HR platform for agribusiness",
+      "imageAlt": "CampoMind — HR platform for agribusiness"
+    },
+    "doutores": {
+      "description": "Institutional website for a hospital clown NGO",
+      "imageAlt": "Doutores Palhaços — hospital clown NGO website"
+    },
+    "caseStudy": "Case Study"
   },
   "Contact": {
-    "title1": "Let's build",
-    "titleHighlight": "something",
-    "title2": "together.",
-    "description": "Have a project in mind? Reach out via WhatsApp or connect on social media. I'm always open to new challenges.",
+    "title1": "Let's",
+    "titleHighlight": "talk.",
+    "title2": "",
+    "description": "Open to new projects, contracts, and full-time roles. Reply within 24h.",
     "whatsappCta": "Chat on WhatsApp",
     "whatsappMessage": "Hey Victor! I came across your portfolio and would love to chat."
   }

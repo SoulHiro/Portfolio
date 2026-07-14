@@ -4,16 +4,46 @@
     "description": "Desenvolvedor de software e designer de produto criando experiências digitais com propósito."
   },
   "Nav": {
-    "about": "Sobre",
-    "devlog": "Devlog",
-    "lab": "Lab",
+    "expertise": "Expertise",
+    "work": "Work",
     "contact": "Contato",
     "openMenu": "Abrir menu",
     "closeMenu": "Fechar menu"
   },
   "Hero": {
-    "description": "Construindo produtos digitais com visão sistêmica — do problema de negócio à interface, passando pela arquitetura e experiência.",
-    "cta": "Entrar em contato"
+    "level": "Pleno",
+    "bioTitle": "Quem sou.",
+    "remote": "Remoto friendly",
+    "languages": "PT Nativo · EN Básico",
+    "bio": "Engenheiro fullstack freelancer há 2 anos, levando produtos do zero à produção solo, arquitetura, frontend, infraestrutura. Atuei em ecommerce e SaaS. Penso no que vai ser entregue e por que deveria existir.",
+    "cta": "Entrar em contato",
+    "cvCta": "Curriculum Vitae"
+  },
+  "Expertise": {
+    "title": "O que eu",
+    "titleHighlight": "faço bem",
+    "item1Title": "Engenharia Frontend",
+    "item1Desc": "Construindo interfaces que fazem sentido. Do design system à tela renderizada, com performance e acessibilidade integradas desde o início.",
+    "item2Title": "Arquitetura & Sistemas",
+    "item2Desc": "Projetando APIs e camadas de dados que aguentam carga real. Ownership total do schema ao deploy, em Node.js, Go e PostgreSQL.",
+    "item3Title": "Visão de Produto",
+    "item3Desc": "Como founder, pergunto o porquê antes do como. Me importo com o problema sendo resolvido, não apenas com a stack que o resolve."
+  },
+  "Experience": {
+    "title": "Linha do",
+    "titleHighlight": "tempo",
+    "item1Period": "2022",
+    "item1Role": "Técnico de TI",
+    "item1Field": "Tecnologia & Operações",
+    "item1Desc": "Gerenciei a infraestrutura de TI completa de um restaurante: site institucional, máquinas de cartão e hardware. Apoiei também rotinas administrativas e de precificação.",
+    "item2Period": "2023 — Presente",
+    "item2Role": "Desenvolvedor Web",
+    "item2Field": "Terceiro Setor",
+    "item2Desc": "Criei e mantenho o site institucional dos Doutores Palhaços, ONG brasileira que leva humor e arte a crianças hospitalizadas.",
+    "item3Period": "2024 — Presente",
+    "item3Role": "Engenheiro Freelancer",
+    "item3Field": "Frontend & Fullstack",
+    "item3Desc": "Construindo aplicações web em React e Next.js para clientes em ecommerce e SaaS."
   },
   "HomeDevlog": {
     "label": "DEVLOG",
@@ -87,19 +117,24 @@
     "wip": "Em construção",
     "viewProject": "Ver projeto",
     "ambar": {
-      "description": "Ecommerce de moda para classes A/B. Autenticação, catálogo com variantes, checkout e painel administrativo.",
+      "description": "",
       "imageAlt": "Casal em casacos de outono em parque com névoa — campanha editorial Âmbar"
     },
-    "portfolio": {
-      "description": "Este site. Next.js App Router, Sanity CMS, i18n, ISR e design system próprio.",
-      "imageAlt": "SoulHiro Studio — identidade visual do portfólio"
-    }
+    "campomind": {
+      "description": "Plataforma SaaS de gestão de RH para o agronegócio",
+      "imageAlt": "CampoMind — plataforma de RH para agronegócio"
+    },
+    "doutores": {
+      "description": "Site institucional para ONG de palhaçaria hospitalar",
+      "imageAlt": "Doutores Palhaços — site da ONG de palhaços hospitalares"
+    },
+    "caseStudy": "Case Study"
   },
   "Contact": {
-    "title1": "Vamos construir",
-    "titleHighlight": "algo",
-    "title2": "juntos.",
-    "description": "Tem um projeto em mente? Me chame no WhatsApp ou conecte nas redes sociais. Estou sempre aberto a novos desafios.",
+    "title1": "Vamos",
+    "titleHighlight": "conversar.",
+    "title2": "",
+    "description": "Aberto a novos projetos, contratos e vagas CLT. Respondo em até 24h.",
     "whatsappCta": "Conversar no WhatsApp",
     "whatsappMessage": "Oi Victor! Encontrei seu portfólio e adoraria conversar."
   }
