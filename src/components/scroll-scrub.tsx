@@ -6,6 +6,8 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const cleanupFns: (() => void)[] = [];
+
     const init = async () => {
       const { gsap } = await import("gsap");
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
@@ -103,6 +105,32 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
           scrub: 1,
           animation: headerTl,
         });
+
+        // Hat hover — same feel as hero prop hover
+        const onHatEnter = () => {
+          gsap.to(hpHat, {
+            rotate: -10,
+            y: -10,
+            duration: 0.4,
+            ease: "power2.out",
+            transformOrigin: "50% 100%",
+          });
+        };
+        const onHatLeave = () => {
+          gsap.to(hpHat, {
+            rotate: 0,
+            y: 0,
+            duration: 0.5,
+            ease: "elastic.out(1, 0.5)",
+          });
+        };
+        hpHat.style.cursor = "pointer";
+        hpHat.addEventListener("mouseenter", onHatEnter);
+        hpHat.addEventListener("mouseleave", onHatLeave);
+        cleanupFns.push(() => {
+          hpHat.removeEventListener("mouseenter", onHatEnter);
+          hpHat.removeEventListener("mouseleave", onHatLeave);
+        });
       }
 
       if (hpGrid && hpCards.length > 0) {
@@ -133,6 +161,10 @@ export function ScrollScrub({ children }: { children: ReactNode }) {
     };
 
     init();
+
+    return () => {
+      for (const fn of cleanupFns) fn();
+    };
   }, []);
 
   return <div ref={ref}>{children}</div>;
