@@ -8,8 +8,7 @@ type Project = {
   technologies: string[];
   liveUrl: string | null;
   githubRepo: string | null;
-  image: string | null;
-  placeholderGradient?: string;
+  image: string;
   imageAlt: string;
   caseStudy?: boolean;
 };
@@ -38,22 +37,15 @@ function ProjectCard({
 
   return (
     <div className={`group relative overflow-hidden ${className}`} {...rest}>
-      {project.image ? (
-        <Image
-          src={project.image}
-          alt={project.imageAlt}
-          fill
-          quality={90}
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          priority={priority}
-          sizes={imageSize}
-        />
-      ) : (
-        <div
-          className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105"
-          style={{ background: project.placeholderGradient }}
-        />
-      )}
+      <Image
+        src={project.image}
+        alt={project.imageAlt}
+        fill
+        quality={90}
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        priority={priority}
+        sizes={imageSize}
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5" />
       <div
         className="absolute inset-0 pointer-events-none"
@@ -147,9 +139,7 @@ export async function HomeProjects() {
     ],
     liveUrl: "https://campomind.com.br/",
     githubRepo: "SoulHiro/CampoMind",
-    image: null,
-    placeholderGradient:
-      "linear-gradient(160deg, oklch(0.22 0 0) 0%, oklch(0.13 0 0) 100%)",
+    image: "/images/campomind-banner.webp",
     imageAlt: t("campomind.imageAlt"),
   };
 
@@ -159,9 +149,7 @@ export async function HomeProjects() {
     technologies: ["Next.js", "TypeScript", "Drizzle ORM", "Neon"],
     liveUrl: "https://doutorespalhacos.com/",
     githubRepo: "SoulHiro/DoctorSite",
-    image: null,
-    placeholderGradient:
-      "linear-gradient(160deg, oklch(0.19 0 0) 0%, oklch(0.12 0 0) 100%)",
+    image: "/images/doutores-banner.webp",
     imageAlt: t("doutores.imageAlt"),
   };
 
