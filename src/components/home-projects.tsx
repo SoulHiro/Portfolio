@@ -11,11 +11,11 @@ type Project = {
   image: string;
   imageAlt: string;
   caseStudy?: boolean;
+  status?: string;
 };
 
 function ProjectCard({
   project,
-  wipLabel,
   caseStudyLabel,
   className = "",
   priority = false,
@@ -57,13 +57,18 @@ function ProjectCard({
         aria-hidden="true"
       />
 
-      {project.caseStudy && (
-        <div className="absolute top-4 right-4">
+      <div className="absolute top-4 right-4 flex items-center gap-2">
+        {project.status && (
+          <span className="font-mono text-label-xs text-white/50 tracking-widest uppercase bg-black/40 backdrop-blur-sm px-2.5 py-1 border border-white/10">
+            {project.status}
+          </span>
+        )}
+        {project.caseStudy && (
           <span className="font-mono text-label-xs text-white/70 tracking-widest uppercase bg-black/50 backdrop-blur-sm px-2.5 py-1 border border-white/15">
             Case Study
           </span>
-        </div>
-      )}
+        )}
+      </div>
 
       <div
         className={`absolute inset-x-0 bottom-0 flex flex-col gap-3 ${compact ? "p-5" : "p-6 md:p-8"}`}
@@ -137,10 +142,11 @@ export async function HomeProjects() {
       "Neon",
       "Better Auth",
     ],
-    liveUrl: "https://campomind.com.br/",
+    liveUrl: null,
     githubRepo: "SoulHiro/CampoMind",
     image: "/images/campomind-banner.webp",
     imageAlt: t("campomind.imageAlt"),
+    status: "Beta",
   };
 
   const doutores: Project = {
@@ -151,6 +157,7 @@ export async function HomeProjects() {
     githubRepo: "SoulHiro/DoctorSite",
     image: "/images/doutores-banner.webp",
     imageAlt: t("doutores.imageAlt"),
+    status: "Redesign",
   };
 
   return (
