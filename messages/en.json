@@ -45,13 +45,6 @@
     "item3Field": "Frontend & Fullstack",
     "item3Desc": "Building production web applications in React and Next.js for clients across ecommerce and SaaS."
   },
-  "HomeDevlog": {
-    "label": "DEVLOG",
-    "title": "What I'm",
-    "titleHighlight": "writing",
-    "viewAll": "View all",
-    "viewAllMobile": "View all posts"
-  },
   "About": {
     "label": "WHO I AM",
     "alt": "Victor M. Santos — Software Engineer & Product Designer",
@@ -63,13 +56,6 @@
     "title": "Selected",
     "titleHighlight": "works",
     "projects": "projects"
-  },
-  "WorksPage": {
-    "label": "DEVLOG",
-    "title": "Devlog",
-    "description": "Engineering in the open. Real code, real decisions, real trade-offs — documented as I build.",
-    "noPosts": "No posts yet.",
-    "readMin": "min read"
   },
   "Footer": {
     "copyright": "© {year} Victor M. Santos",

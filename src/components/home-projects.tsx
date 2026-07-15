@@ -191,8 +191,8 @@ export async function HomeProjects() {
           alt=""
           aria-hidden="true"
           data-hp-hat=""
-          className="w-10 h-auto left-156 mb-2 absolute"
-          style={{ top: "0.5rem", rotate: "15deg" }}
+          className="w-10 h-auto left-157 mb-2 absolute"
+          style={{ top: "0.5rem", rotate: "20deg" }}
         />
         <img
           src="/cat.svg"
