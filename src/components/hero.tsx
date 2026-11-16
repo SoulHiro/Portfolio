@@ -470,17 +470,18 @@ export function Hero() {
           <div ref={parallaxRef}>
             <div ref={imageScaleRef} className="origin-top">
               {/* Portrait box: height drives everything; props below are placed
-                  in % of this box so they stay glued to the face at any size. */}
+                  in % of this box so they stay glued to the face at any size.
+                  Aspect must match profile.png (1312×1572) or the % drift. */}
               <div
                 ref={profileImageRef}
-                className="relative h-[70svh] sm:h-[78svh] lg:h-[105vh] aspect-[500/720]"
+                className="relative h-[70svh] sm:h-[78svh] lg:h-[105vh] aspect-[1312/1572]"
               >
                 <Image
                   src="/profile.png"
                   alt="Victor M. Santos"
-                  width={500}
-                  height={720}
-                  sizes="(min-width: 1024px) 73vh, 55svh"
+                  width={1312}
+                  height={1572}
+                  sizes="(min-width: 1024px) 88vh, 66svh"
                   className="h-full w-auto max-w-none block"
                   priority
                 />
@@ -495,8 +496,8 @@ export function Hero() {
                 className="absolute select-none cursor-pointer"
                 style={{
                   top: "11.43%",
-                  left: "35.66%",
-                  width: "52.11%",
+                  left: "29.67%",
+                  width: "43.36%",
                   height: "auto",
                 }}
               />
@@ -509,7 +510,7 @@ export function Hero() {
                 className="absolute select-none cursor-pointer"
                 style={{
                   top: "40%",
-                  left: "72.69%",
+                  left: "60.48%",
                   width: "auto",
                   height: "28.57%",
                 }}
@@ -523,8 +524,8 @@ export function Hero() {
                 className="absolute select-none cursor-pointer"
                 style={{
                   top: "50.48%",
-                  left: "45.94%",
-                  width: "32.91%",
+                  left: "38.23%",
+                  width: "27.39%",
                   height: "auto",
                 }}
               />
@@ -537,8 +538,8 @@ export function Hero() {
                 className="absolute select-none cursor-pointer"
                 style={{
                   top: "60.95%",
-                  left: "46.63%",
-                  width: "30.17%",
+                  left: "38.8%",
+                  width: "25.1%",
                   height: "auto",
                 }}
               />
