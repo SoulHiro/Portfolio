@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { ContactForm } from "@/components/contact-form";
 import { H2, P } from "@/components/ui/typography";
+import { socialLinks } from "@/lib/social-links";
 
 const EMAIL = "victormts.s1@gmail.com";
 
@@ -10,9 +11,9 @@ export async function Contact() {
   return (
     <section
       id="contact"
-      className="flex items-center justify-center min-h-screen py-24 md:py-32"
+      className="flex items-center justify-center md:min-h-screen py-16 md:py-32"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 w-full">
         {/* Left — info */}
         <div data-reveal className="flex flex-col gap-8 justify-center">
           <H2>
@@ -40,10 +41,27 @@ export async function Contact() {
 
           <a
             href={`mailto:${EMAIL}`}
-            className="text-body-md text-muted-foreground hover:text-foreground transition-colors duration-300 w-fit"
+            className="text-body-md text-muted-foreground hover:text-foreground transition-colors duration-300 w-fit break-all"
           >
             {EMAIL}
           </a>
+
+          {/* Desktop shows these in the fixed side rail; below lg it's hidden */}
+          <ul className="flex items-center gap-2 -ml-2.5 lg:hidden">
+            {socialLinks.map(({ href, icon: Icon, label }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex size-11 items-center justify-center text-muted-foreground/60 hover:text-foreground transition-colors duration-300"
+                >
+                  <Icon className="size-5" stroke={1.5} />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Right — form */}

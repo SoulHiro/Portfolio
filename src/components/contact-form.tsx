@@ -143,6 +143,8 @@ export function ContactForm() {
           value={form.email}
           onChange={set("email")}
           type="email"
+          inputMode="email"
+          autoComplete="email"
           placeholder="seu@email.com"
           className={inputClass}
         />
