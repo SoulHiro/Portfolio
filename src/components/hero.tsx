@@ -154,19 +154,25 @@ export function Hero() {
               0.55,
             );
           } else {
-            // No room for a side-by-side layout: the portrait slides right and
-            // dims into a backdrop so the bio reads on top of it.
+            // No room side by side: the bio sits at the top and the portrait
+            // shrinks into the space left below it, anchored at the bottom.
+            // Layout boxes (offset*) ignore transforms, so this stays correct
+            // when ScrollTrigger re-measures mid-animation.
+            const fitScale = () => {
+              const img = imageRef.current;
+              const bio = bioRef.current;
+              if (!img || !bio) return 0.6;
+              const imgBottom = img.offsetTop + img.offsetHeight;
+              const bioBottom = bio.offsetTop + bio.offsetHeight;
+              const s = (imgBottom - bioBottom - 16) / img.offsetHeight;
+              return Math.min(0.8, Math.max(0.42, s));
+            };
+            gsap.set(imageRef.current, { transformOrigin: "50% 100%" });
             tl.to(
               imageRef.current,
-              {
-                x: () => window.innerWidth * 0.3,
-                opacity: 0.22,
-                ease: "none",
-                duration: 0.5,
-              },
+              { scale: fitScale, ease: "none", duration: 0.5 },
               0.55,
             );
-            tl.to(props, { opacity: 0, ease: "none", duration: 0.3 }, 0.55);
           }
 
           tl.fromTo(
@@ -230,7 +236,7 @@ export function Hero() {
           const setPropsInteractive = (progress: number) => {
             const active = isDesktop
               ? progress > 0.29 && progress < 0.76
-              : progress < 0.04;
+              : progress < 0.04 || (progress > 0.29 && progress < 0.76);
             for (const el of props) {
               if (el) el.style.pointerEvents = active ? "auto" : "none";
             }
@@ -600,13 +606,16 @@ export function Hero() {
         {/* Bio panel */}
         <div
           ref={bioRef}
-          className="absolute left-11 right-5 top-[50svh] -translate-y-1/2 z-20 max-w-md flex flex-col gap-5 lg:left-10 lg:right-auto lg:top-1/2 lg:max-w-sm lg:gap-6"
+          className="absolute left-11 right-5 top-[4.5rem] z-20 max-w-md flex flex-col gap-4 lg:left-10 lg:right-auto lg:top-1/2 lg:-translate-y-1/2 lg:max-w-sm lg:gap-6"
           style={{ opacity: 0, visibility: "hidden" }}
         >
-          <h2 className="font-display text-[min(17vw,5.5rem)] lg:text-display-xl leading-none tracking-tight italic">
+          <h2 className="font-display text-[min(15vw,5rem)] lg:text-display-xl leading-none tracking-tight italic">
             {t("bioTitle")}
           </h2>
-          <P size="lg" className="text-foreground leading-relaxed">
+          <P
+            size="md"
+            className="lg:text-body-lg text-foreground leading-relaxed"
+          >
             {t("bio")}
           </P>
           <div className="flex items-center gap-3 font-mono text-label-xs text-muted-foreground/60 tracking-wide">
