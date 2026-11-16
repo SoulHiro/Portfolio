@@ -20,13 +20,14 @@ export function LocaleSwitcher() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const handleClickOutside = (e: PointerEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("pointerdown", handleClickOutside);
+    return () =>
+      document.removeEventListener("pointerdown", handleClickOutside);
   }, []);
 
   const switchLocale = (newLocale: Locale) => {
@@ -39,8 +40,9 @@ export function LocaleSwitcher() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 cursor-pointer text-muted-foreground hover:text-foreground transition-colors duration-300"
+        className="flex items-center gap-1.5 cursor-pointer -m-3 p-3 text-muted-foreground hover:text-foreground transition-colors duration-300"
         aria-label="Change language"
+        aria-expanded={open}
       >
         <Globe className="size-3.5" strokeWidth={1.5} />
       </button>

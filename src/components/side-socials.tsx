@@ -1,29 +1,7 @@
 "use client";
 
-import {
-  IconBrandGithub,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-} from "@tabler/icons-react";
 import { useEffect, useRef } from "react";
-
-const links = [
-  {
-    href: "https://www.linkedin.com/in/victormts/",
-    icon: IconBrandLinkedin,
-    label: "LinkedIn",
-  },
-  {
-    href: "https://github.com/SoulHiro",
-    icon: IconBrandGithub,
-    label: "GitHub",
-  },
-  {
-    href: "https://www.instagram.com/soulhirostudio",
-    icon: IconBrandInstagram,
-    label: "Instagram",
-  },
-];
+import { socialLinks } from "@/lib/social-links";
 
 // Threshold matches roughly when the "Quem sou" bio panel fades in (~75% through the hero scroll pin of 2200px)
 const SHOW_THRESHOLD = 1000;
@@ -49,7 +27,7 @@ export function SideSocials() {
       style={{ opacity: 0, transition: "opacity 0.6s ease" }}
     >
       <div className="w-[1.5px] h-[28vh] bg-foreground/10" />
-      {links.map(({ href, icon: Icon, label }) => (
+      {socialLinks.map(({ href, icon: Icon, label }) => (
         <a
           key={label}
           href={href}

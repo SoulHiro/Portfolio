@@ -191,6 +191,13 @@
     -webkit-user-select: none;
   }
 
+  /* The global user-select:none above breaks caret/typing in iOS Safari */
+  input,
+  textarea {
+    user-select: text;
+    -webkit-user-select: text;
+  }
+
   img,
   a {
     -webkit-user-drag: none;
@@ -200,6 +207,7 @@
 
   body {
     @apply bg-background text-foreground;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 

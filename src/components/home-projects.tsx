@@ -161,7 +161,7 @@ export async function HomeProjects() {
   };
 
   return (
-    <section id="work" className="py-24">
+    <section id="work" className="py-16 md:py-24">
       <div
         data-hp-header=""
         className="flex flex-col items-center mb-12 relative"
@@ -171,7 +171,7 @@ export async function HomeProjects() {
           alt=""
           aria-hidden="true"
           data-hp-hat=""
-          className="w-10 h-auto left-157 mb-2 absolute"
+          className="w-10 h-auto left-[calc(50%+1.25rem)] mb-2 absolute"
           style={{ top: "0.5rem", rotate: "20deg" }}
         />
         <img
@@ -216,9 +216,9 @@ export async function HomeProjects() {
         <ProjectCard
           project={doutores}
           caseStudyLabel={t("caseStudy")}
-          className="aspect-square"
+          className="aspect-square sm:col-span-2 sm:aspect-[2/1] lg:col-span-1 lg:aspect-square"
           compact
-          imageSize="(max-width: 640px) 100vw, 33vw"
+          imageSize="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 33vw"
           data-hp-card=""
         />
       </div>
